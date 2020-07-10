@@ -1,0 +1,169 @@
+﻿use SeaCargoTransportation
+go
+insert into ContainersCharacteristics
+(
+	IDContainers,
+	Weight,
+	LenghtIn,
+	WidthIn,
+	HeightIn,
+	AmountIn,
+	LenghtOut,
+	WidthOut,
+	HeightOut,
+	AmountOut
+)
+	values
+	(
+		1,
+		0.3,
+		0.5,
+		0.5,
+		0.5,
+		0.125,
+		0.51,
+		0.51,
+		0.51,
+		0.133
+	)
+go
+
+insert into ContainersCharacteristics
+(
+	IDContainers,
+	Weight,
+	LenghtIn,
+	WidthIn,
+	HeightIn,
+	AmountIn,
+	LenghtOut,
+	WidthOut,
+	HeightOut,
+	AmountOut
+)
+	values
+	(
+		2,
+		0.4,
+		0.7,
+		0.7,
+		0.5,
+		0.196,
+		0.41,
+		0.71,
+		0.71,
+		0.207
+	)
+go
+
+insert into ContainersCharacteristics
+(
+	IDContainers,
+	Weight,
+	LenghtIn,
+	WidthIn,
+	HeightIn,
+	AmountIn,
+	LenghtOut,
+	WidthOut,
+	HeightOut,
+	AmountOut
+)
+	values
+	(
+		3,
+		0.25,
+		0.4,
+		0.4,
+		0.4,
+		0.064,
+		0.41,
+		0.41,
+		0.41,
+		0.069
+	)
+go
+
+insert into ContainersCharacteristics
+(
+	IDContainers,
+	Weight,
+	LenghtIn,
+	WidthIn,
+	HeightIn,
+	AmountIn,
+	LenghtOut,
+	WidthOut,
+	HeightOut,
+	AmountOut
+)
+	values
+	(
+		4,
+		0.4,
+		0.4,
+		0.5,
+		0.7,
+		0.140,
+		0.42,
+		0.52,
+		0.72,
+		0.158
+	)
+go
+
+insert into ContainersCharacteristics
+(
+	IDContainers,
+	Weight,
+	LenghtIn,
+	WidthIn,
+	HeightIn,
+	AmountIn,
+	LenghtOut,
+	WidthOut,
+	HeightOut,
+	AmountOut
+)
+	values
+	(
+		5,
+		1.2,
+		0.8,
+		0.8,
+		0.8,
+		0.512,
+		0.82,
+		0.82,
+		0.82,
+		0.552
+	)
+go
+
+insert into ContainersCharacteristics
+(
+	IDContainers,
+	Weight,
+	LenghtIn,
+	WidthIn,
+	HeightIn,
+	AmountIn,
+	LenghtOut,
+	WidthOut,
+	HeightOut,
+	AmountOut
+)
+	values
+	(
+		6,
+		4,
+		3,
+		3,
+		3,
+		27,
+		3.04,
+		3.04,
+		3.04,
+		28.095
+	)
+go
