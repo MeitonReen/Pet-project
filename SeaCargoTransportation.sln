@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lvl3_Client", "SeaCargoTransportation\lvl3_Client.csproj", "{2B79F958-C317-44E0-A3F5-30AE2149F36C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lvl0_Client", "SeaCargoTransportation\lvl0_Client.csproj", "{2B79F958-C317-44E0-A3F5-30AE2149F36C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lvl0_UseCasesByClient", "lvl0_UseCasesByClient\lvl0_UseCasesByClient.csproj", "{0BBE2D20-8EA8-41AF-A153-5F5CEC9C9D92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lvl3_UseCases", "lvl3_UseCases\lvl3_UseCases.csproj", "{0BBE2D20-8EA8-41AF-A153-5F5CEC9C9D92}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lvl1_ApplicationUseCasesByClient", "lvl1_ApplicationUseCasesByClient\lvl1_ApplicationUseCasesByClient.csproj", "{EDDABF16-C91C-41CA-A758-B62DFFA48048}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lvl2_ApplicationUseCases", "lvl2_ApplicationUseCases\lvl2_ApplicationUseCases.csproj", "{EDDABF16-C91C-41CA-A758-B62DFFA48048}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lvl2_CommunicatorsBtwLvl1AndLvl3", "lvl2_CommunicatorsBtwLvl1AndLvl3\lvl2_CommunicatorsBtwLvl1AndLvl3.csproj", "{EAC5F31F-F4C3-411D-A6D6-9EF220A7E187}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lvl1_CommunicatorsBtwLvl1AndLvl3", "lvl1_CommunicatorsBtwLvl1AndLvl3\lvl1_CommunicatorsBtwLvl1AndLvl3.csproj", "{EAC5F31F-F4C3-411D-A6D6-9EF220A7E187}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
