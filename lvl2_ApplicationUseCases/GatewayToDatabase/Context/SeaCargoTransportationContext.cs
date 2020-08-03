@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace lvl2_ApplicationUseCases.GatewayToDatabase.Context
+namespace Layer2_ApplicationUseCases.GatewayToDatabase.Context
 {
 	public partial class SeaCargoTransportationContext : DbContext
 	{

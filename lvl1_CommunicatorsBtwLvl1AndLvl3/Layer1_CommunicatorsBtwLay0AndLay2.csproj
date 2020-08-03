@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="..\..\..\Задачки побольше %2528Impl%2529\SeaCargoTransportation\lvl2_CommunicatorsBtwLvl1AndLvl3\AllDataClientRequests\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\lvl2_ApplicationUseCases\Layer2_ApplicationUseCases.csproj" />
+  </ItemGroup>
+
+</Project>

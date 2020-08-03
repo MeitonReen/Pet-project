@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace lvl2_ApplicationUseCases.GatewayToDatabase
+namespace Layer2_ApplicationUseCases.GatewayToDatabase
 {
     public partial class StatusesForFligths
     {
