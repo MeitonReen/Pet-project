@@ -17,8 +17,6 @@ namespace Layer2_ApplicationUseCases.Interactors.CreatingOrder.States
 		public object Execute(object dataOfClientRequest)
 		{
 			CargosInOrders = (CargosInOrders)dataOfClientRequest;
-
-
 			return null;
 		}
 		public void ClearRequest()

@@ -1,94 +1,75 @@
 ﻿
-using System;
 using System.Collections.Generic;
 using System.Threading;
 
 using Layer1_CommunicatorsBtwLvl1AndLvl3.
-	InterfacesForReceiversDataPresentation;
+	InterfacesForReceiverOfResponsesToClient;
 using Layer1_CommunicatorsBtwLvl1AndLvl3.
 	InterfacesForControllerOfClientRequests;
 using Layer2_ApplicationUseCases.
 	DataAboutClientRequest;
-using Layer0_Client.
-	InterfacesForViews;
 using Layer1_CommunicatorsBtwLvl1AndLvl3.
 	DataAboutResponsesToClientRequests;
 using Layer0_Client.
 	InterfacesForProcessingDataContexts;
+using Layer0_Client.
+	InterfacesForClientController;
 
 namespace Layer0_Client.ClientController
 {
-	class ClientController : IReceiverOfResponsesToClientRequests
+	public class ClientController : 
+		ISenderOfClientRequestsToApplication, IReceiverOfResponsesToClient
 	{
-		private IReceiverDataOfClientRequest ReceiverDataOfClientRequest;
+		private IReceiverDataOfClientRequests ReceiverDataOfClientRequest;
 		
 		private Dictionary<EnumClientRequests,
 			ISetterToDataContextsFromResponseToClient> 
-			DataContextsForApplicationResponsesToClient =
+			SettersToDataContextsFromResponseToClient =
 				new Dictionary<EnumClientRequests, 
 					ISetterToDataContextsFromResponseToClient>();
 
 		private  Dictionary<EnumClientRequests, 
 			IGetterFromDataContextForClientRequest> 
-			DataContextsForSendClientRequestsToApplication =
+			GettersFromDataContextForClientRequest =
 				new Dictionary<EnumClientRequests, 
 					IGetterFromDataContextForClientRequest>();
 
-		private ICreatingOrder CreatingOrder = null;
 		private SynchronizationContext SynchronizationContext;
 
 		public ClientController(
-			IReceiverDataOfClientRequest receiverDataOfClientRequest,
-			ICreatingOrder creatingOrder,
+			IReceiverDataOfClientRequests receiverDataOfClientRequest,
 			SynchronizationContext synchronizationContext)
 		{
 			ReceiverDataOfClientRequest = receiverDataOfClientRequest;
-			CreatingOrder = creatingOrder;
+			
 			SynchronizationContext = synchronizationContext;
 
-			CreatingOrder.GetAttributeForCargos += Send;
 		}
-//!
-		private void Send(object sender, EventArgs e)
+		public void Send(EnumClientRequests clientRequest)
 		{
-			
 			DataOfClientRequest NewClientRequest = new DataOfClientRequest();
-			NewClientRequest.RequestID = EnumClientRequests.CreatingOrder_GetAttributeForCargos;
-			NewClientRequest.DataForExecutorClientRequests = null;
+			NewClientRequest.RequestID = clientRequest;
+			NewClientRequest.DataForExecutorClientRequests = 
+				GettersFromDataContextForClientRequest[clientRequest].
+					Get();
 
 			ReceiverDataOfClientRequest.Receive(NewClientRequest);
 		}
-//!
 
-		public void LinkViewCreatingOrderAndClientRequest(
-			EnumClientRequests clientRequest,
-			ICreatingOrder creatingOrder)
+		public void RegistrationSettersToDataContextsFromResponseToClient(
+			EnumClientRequests requestID, 
+			ISetterToDataContextsFromResponseToClient setter)
 		{
-			creatingOrder.GetAttributeForCargos += (sender, e) =>
-			{
-				DataOfClientRequest NewClientRequest = new DataOfClientRequest();
-				NewClientRequest.RequestID = 
-					EnumClientRequests.CreatingOrder_GetAttributeForCargos;
-				NewClientRequest.DataForExecutorClientRequests = null;
-
-				ReceiverDataOfClientRequest.Receive(NewClientRequest);
-			};
+			SettersToDataContextsFromResponseToClient.Add(requestID, 
+				setter);
 		}
 
-		public void RegistrationDataContextsForApplicationResponsesToClient(
+		public void RegistrationGettersFromDataContextForClientRequest(
 			EnumClientRequests requestID, 
-			ISetterToDataContextsFromResponseToClient dataContext)
+			IGetterFromDataContextForClientRequest getter)
 		{
-			DataContextsForApplicationResponsesToClient.Add(requestID, 
-				dataContext);
-		}
-
-		public void RegistrationDataContextsForSendClientRequestsToApplication(
-			EnumClientRequests requestID, 
-			IGetterFromDataContextForClientRequest dataContext)
-		{
-			DataContextsForSendClientRequestsToApplication.Add(requestID, 
-				dataContext);
+			GettersFromDataContextForClientRequest.Add(requestID, 
+				getter);
 		}
 
 		private void DelegateReceiveToWPF(object data)
@@ -97,7 +78,7 @@ namespace Layer0_Client.ClientController
 				(DataOfResponseToClient)data;
 
 			ISetterToDataContextsFromResponseToClient SetterToDC =
-				DataContextsForApplicationResponsesToClient[
+				SettersToDataContextsFromResponseToClient[
 					DataOfResponseToClient.ClientRequestID];
 			
 			SetterToDC.Set(DataOfResponseToClient.ResponseData);

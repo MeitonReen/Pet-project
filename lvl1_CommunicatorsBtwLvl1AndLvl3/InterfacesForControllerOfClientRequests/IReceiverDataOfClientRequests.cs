@@ -5,7 +5,7 @@ using Layer2_ApplicationUseCases.
 namespace Layer1_CommunicatorsBtwLvl1AndLvl3.
 	InterfacesForControllerOfClientRequests
 {
-	public interface IReceiverDataOfClientRequest
+	public interface IReceiverDataOfClientRequests
 	{
 		public int Receive(DataOfClientRequest _dataClientRequest);
 	}

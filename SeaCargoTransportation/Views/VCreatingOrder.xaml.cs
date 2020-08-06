@@ -11,26 +11,14 @@ namespace Layer0_Client.Views
 	/// Логика взаимодействия для VCreatingOrder.xaml
 	/// </summary>
 	
-	public partial class VCreatingOrder : Window, ICreatingOrder
+	public partial class VCreatingOrder : Window
 	{
-		
 		
 		public VCreatingOrder()
 		{
 			InitializeComponent();
 
 		}
-
-		public event EventHandler GetAttributeForCargos;
 	
-		private void Button_Click(object sender, RoutedEventArgs e)
-		{
-			GetAttributeForCargos?.Invoke(sender, e);
-		}
-
-		private void Button_Click_1(object sender, RoutedEventArgs e)
-		{
-			
-		}
 	}
 }

@@ -58,7 +58,7 @@ namespace Layer2_ApplicationUseCases.
 
 		public CreatingOrder(IPresenterOfResponsesToClientRequest presenter)
 		{
-			RegistrationStates();
+			RegistrationSteps();
 			Presenter = presenter;
 		}
 
@@ -74,8 +74,14 @@ namespace Layer2_ApplicationUseCases.
 
 			return true;
 		}
-		
-		private void RegistrationStates()
+		/// <summary>
+		/// EnumClientRequests[][] - в каждой строке множество прошедших
+		/// состояний из которых можно переходить в создаваемое состояние
+		/// например в состояние 3 можно перейти из {1 и 2} или из {1 и 3}
+		/// или из {1} или из {3}. Таким образом, например, если мы были только
+		/// во 2, то к 3 переход запрещён
+		/// </summary>
+		private void RegistrationSteps()
 		{
 			StateMachine.RegistrationState(
 				EnumClientRequests.CreatingOrder_GetAttributeForCargos,

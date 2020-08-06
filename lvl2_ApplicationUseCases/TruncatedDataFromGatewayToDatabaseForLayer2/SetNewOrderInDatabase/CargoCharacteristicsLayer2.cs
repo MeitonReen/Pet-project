@@ -1,9 +1,9 @@
 ﻿
 namespace Layer2_ApplicationUseCases.
-	TruncatedDataFromGatewayToDatabaseForRequestsFromClient.
+	TruncatedDataFromGatewayToDatabaseForLayer2.
     SetNewOrderInDatabase
 {
-	public class CargoCharacteristics
+	public class CargoCharacteristicsLayer2
 	{	
         public decimal Weight { get; set; }
         public decimal Length { get; set; }

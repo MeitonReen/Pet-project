@@ -1,8 +1,8 @@
 ﻿
 namespace Layer1_CommunicatorsBtwLvl1AndLvl3.
-	TruncatedDataFromGatewayToDatabaseForResponsesToClient
+	TruncatedDataFromGatewayToDatabaseForLayer1
 {
-	public class AttributeForCargo
+	public class AttributeForCargoLayer1
 	{
 		public int IdattributesForCargos { get; set; }
 		public string Name { get; set; }

@@ -12,7 +12,7 @@ using Layer2_ApplicationUseCases.
 namespace Layer1_CommunicatorsBtwLvl1AndLvl3.ControllerOfClientRequests
 {
 	public class ControllerOfClientRequests:
-		IReceiverDataOfClientRequest,
+		IReceiverDataOfClientRequests,
 		IRunnerClientRequests
 	{
 		private Dictionary<EnumClientRequests, IExecutorOfApplicationUseCase>
@@ -40,12 +40,12 @@ namespace Layer1_CommunicatorsBtwLvl1AndLvl3.ControllerOfClientRequests
 			DataOfClientRequest dataClientRequest)
 		{
 			object data = dataClientRequest;
-			Task NewTask = Task.Factory.StartNew( (data) =>
+			Task NewTask = Task.Factory.StartNew( () =>
 				{
 					executorOfClientRequest.Execute(dataClientRequest);
-				},
-				data
+				}
 			);
+
 	
 		}
 	}
