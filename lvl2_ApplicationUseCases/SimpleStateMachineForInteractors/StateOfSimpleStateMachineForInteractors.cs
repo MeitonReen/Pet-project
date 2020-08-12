@@ -5,6 +5,8 @@ using Layer2_ApplicationUseCases.
 using Layer2_ApplicationUseCases.
 	SimpleStateMachineForInteractors.
 	Data;
+using Layer2_ApplicationUseCases.
+	DataAboutClientRequest;
 
 namespace Layer2_ApplicationUseCases.
 	SimpleStateMachineForInteractors
@@ -38,9 +40,9 @@ namespace Layer2_ApplicationUseCases.
 			return Allow;
 		}
 
-		public object Execute(object _dataOfRequest)
+		public object Execute(EnumClientRequests RequestID, object dataOfRequest)
 		{
-			return State.Execute(_dataOfRequest);
+			return State.Execute(RequestID, dataOfRequest);
 		}
 		public void ClearRequest()
 		{

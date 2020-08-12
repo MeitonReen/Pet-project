@@ -13,6 +13,8 @@ namespace Layer2_ApplicationUseCases.GatewayToDatabase
 
         public int Idorder { get; set; }
         public int Idclient { get; set; }
+        public DateTime? DateTimeCreate { get; set; }
+        public string ReceiptNumberOfOrder { get; set; }
 
         public virtual Clients IdclientNavigation { get; set; }
         public virtual ICollection<CargosInOrders> CargosInOrders { get; set; }

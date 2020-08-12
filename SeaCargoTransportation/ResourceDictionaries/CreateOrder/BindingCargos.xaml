@@ -3,7 +3,7 @@
 
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary
-			Source="/ResourceDictionaries/CreateOrder/CreatorSharedDataContext.xaml"
+			Source="/ResourceDictionaries/CreateOrder/CreatorOfSharedDataContext.xaml"
 		></ResourceDictionary>
 	</ResourceDictionary.MergedDictionaries>
 

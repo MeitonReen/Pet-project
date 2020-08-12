@@ -194,6 +194,7 @@
 			Grid.Column="1"
 			HorizontalAlignment="Center"
 			Content="Создать заказ"
+			Command="{Binding SendRequestSetCargosInOrders}"
 		></Button>
 			</Grid>
 		<!--#endregion-->

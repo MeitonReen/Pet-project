@@ -9,7 +9,7 @@ using Layer0_Client.CommandForViews.Shared;
 
 namespace Layer0_Client.CommandForViews.CreateOrder
 {
-	public class AddCargo : WPFCommand, ICommand
+	public class AddCargo : WPFCommand
 	{
 		public ObservableCollection<CargoLayer0> Cargos = null;
 

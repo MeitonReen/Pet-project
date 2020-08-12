@@ -7,6 +7,8 @@ using Layer2_ApplicationUseCases.
 using Layer2_ApplicationUseCases.
 	SimpleStateMachineForInteractors.
 	Data;
+using Layer2_ApplicationUseCases.
+	DataAboutClientRequest;
 
 namespace Layer2_ApplicationUseCases.
 	SimpleStateMachineForInteractors
@@ -14,12 +16,11 @@ namespace Layer2_ApplicationUseCases.
 	/// <summary>
 	/// 
 	/// </summary>
-	/// <typeparam name="TEnumRequestID"></typeparam>
+	/// <typeparam name="EnumClientRequests"></typeparam>
 	/// <typeparam name="TDataOfRequest"></typeparam>
 	/// <typeparam name="TExecutorRequest"></typeparam>
 	public class SimpleStateMachineForInteractors<
-		TEnumRequestID, TDataOfRequest, TExecutorRequest>
-		where TEnumRequestID : Enum
+		TDataOfRequest, TExecutorRequest>
 		where TExecutorRequest : IExecutorOfClientRequest
 	{
 		#region Fields
@@ -30,8 +31,8 @@ namespace Layer2_ApplicationUseCases.
 				EnumStateID,
 				StateOfSimpleStateMachineForInteractors<TExecutorRequest>>();
 
-		private Dictionary<TEnumRequestID, EnumStateID> StateIDsOnRequestIDs =
-			new Dictionary<TEnumRequestID, EnumStateID>();
+		private Dictionary<EnumClientRequests, EnumStateID> StateIDsOnRequestIDs =
+			new Dictionary<EnumClientRequests, EnumStateID>();
 
 		private List<EnumStateID> ExecutedStates = new List<EnumStateID>();
 		private List<EnumStateID> LastStates = new List<EnumStateID>();
@@ -45,10 +46,10 @@ namespace Layer2_ApplicationUseCases.
 		}
 		
 		public void RegistrationState(
-			TEnumRequestID RequestID,
+			EnumClientRequests RequestID,
 			TExecutorRequest executorRequest,
 			EnumAttributesState[] attributeState,
-			params TEnumRequestID[][] allowedTransitionsToThisRequest)
+			params EnumClientRequests[][] allowedTransitionsToThisRequest)
 		{
 
 			EnumStateID[][] allowedTransitionsToThisState =
@@ -71,15 +72,15 @@ namespace Layer2_ApplicationUseCases.
 		}
 
 		//Добавить обобщённый Result
-		public object Execute(TEnumRequestID RequestID, TDataOfRequest dataOfRequest)
+		public object Execute(EnumClientRequests requestID, TDataOfRequest dataOfRequest)
 		{
 			object Res = null;
-			EnumStateID NewState = StateIDsOnRequestIDs[RequestID];
+			EnumStateID NewState = StateIDsOnRequestIDs[requestID];
 
 			if (CheckAllowedTransitionsToNewStateFromExecutedStates(
 				NewState))
 			{
-				Res = States[NewState].Execute(dataOfRequest);
+				Res = States[NewState].Execute((EnumClientRequests)requestID, dataOfRequest);
 				
 				ExecutedStates.Add(NewState);
 
@@ -108,21 +109,21 @@ namespace Layer2_ApplicationUseCases.
 
 				allowedTransitionsToThisState = Correct;
 			}
-
+				;
 		}
 		
 		private void RegistrationRequestIDs()
 		{
 			int StateID = 0;
 			foreach(
-				TEnumRequestID RequestID in
-					Enum.GetValues(typeof(TEnumRequestID)))
+				EnumClientRequests RequestID in
+					Enum.GetValues(typeof(EnumClientRequests)))
 			{
 				StateIDsOnRequestIDs.Add(RequestID, (EnumStateID)StateID);
 				StateID++;
 			}
 		}
-		private EnumStateID[][] ConvertRequestIDsToStateIDs(TEnumRequestID[][] RequestIDs)
+		private EnumStateID[][] ConvertRequestIDsToStateIDs(EnumClientRequests[][] RequestIDs)
 		{
 			EnumStateID[][] StatesID = new EnumStateID[RequestIDs.GetLength(0)][];
 			

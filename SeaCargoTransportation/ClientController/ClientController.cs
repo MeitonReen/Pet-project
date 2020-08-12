@@ -14,12 +14,17 @@ using Layer0_Client.
 	InterfacesForProcessingDataContexts;
 using Layer0_Client.
 	InterfacesForClientController;
+using Layer2_ApplicationUseCases.
+    TruncatedDataFromGatewayToDatabaseForLayer2.
+    Shared;
 
 namespace Layer0_Client.ClientController
 {
 	public class ClientController : 
 		ISenderOfClientRequestsToApplication, IReceiverOfResponsesToClient
 	{
+		private ClientLayer2 Client;
+
 		private IReceiverDataOfClientRequests ReceiverDataOfClientRequest;
 		
 		private Dictionary<EnumClientRequests,
@@ -38,20 +43,28 @@ namespace Layer0_Client.ClientController
 
 		public ClientController(
 			IReceiverDataOfClientRequests receiverDataOfClientRequest,
-			SynchronizationContext synchronizationContext)
+			SynchronizationContext synchronizationContext,
+			ClientLayer2 client)
 		{
 			ReceiverDataOfClientRequest = receiverDataOfClientRequest;
-			
 			SynchronizationContext = synchronizationContext;
-
+			Client = client;
 		}
 		public void Send(EnumClientRequests clientRequest)
 		{
 			DataOfClientRequest NewClientRequest = new DataOfClientRequest();
 			NewClientRequest.RequestID = clientRequest;
-			NewClientRequest.DataForExecutorClientRequests = 
+
+			if (GettersFromDataContextForClientRequest.ContainsKey(clientRequest))
+			{
+				NewClientRequest.DataForExecutorClientRequests = 
 				GettersFromDataContextForClientRequest[clientRequest].
 					Get();
+			}
+			else
+			{
+				NewClientRequest.DataForExecutorClientRequests = null;
+			}
 
 			ReceiverDataOfClientRequest.Receive(NewClientRequest);
 		}

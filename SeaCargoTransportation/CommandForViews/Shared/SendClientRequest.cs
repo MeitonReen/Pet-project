@@ -9,7 +9,7 @@ using Layer0_Client.InterfacesForClientController;
 
 namespace Layer0_Client.CommandForViews.Shared
 {
-	public class SendClientRequest : WPFCommand, ICommand
+	public class SendClientRequest : WPFCommand
 	{
 		private EnumClientRequests ClientRequestID = (EnumClientRequests)(-1);
 		private ISenderOfClientRequestsToApplication

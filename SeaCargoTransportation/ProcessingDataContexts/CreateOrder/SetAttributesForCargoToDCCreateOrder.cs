@@ -10,12 +10,12 @@ using Layer1_CommunicatorsBtwLay0AndLay2.
 
 namespace Layer0_Client.ProcessingDataContexts.CreateOrder
 {
-	public class SetAttributesForCargoToCargosInOrder : 
+	public class SetAttributesForCargoToDCCreateOrder : 
 		ISetterToDataContextsFromResponseToClient
 	{
 		private DCCreateOrder DCAttributesForCargos;
 
-		public SetAttributesForCargoToCargosInOrder(
+		public SetAttributesForCargoToDCCreateOrder(
 			DCCreateOrder dCAttributesForCargos)
 		{
 			DCAttributesForCargos = dCAttributesForCargos;

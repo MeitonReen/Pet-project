@@ -16,7 +16,6 @@ namespace Layer0_Client.DataContextsForBindings.CreateOrder
 	public class DCCreateOrder
 	{
 		public ObservableCollection<CargoLayer0> Cargos { get; set; } = null;
-		public CargoLayer0 CargoLayer0 { get; set; } = null;
 		public ObservableCollection<AttributeForCargoLayer0>
 			GettedAttributesForCargo { get; set; } = null;
 
@@ -34,6 +33,9 @@ namespace Layer0_Client.DataContextsForBindings.CreateOrder
 			Cargos.Add(NewCargo);
 		}
 
+		private SendClientRequest GetAttributesForCargos =
+			new SendClientRequest(
+					EnumClientRequests.CreatingOrder_GetAttributeForCargos);
 		public ICommand SendRequestGetAttributesForCargos
 		{ 
 			get
@@ -41,9 +43,17 @@ namespace Layer0_Client.DataContextsForBindings.CreateOrder
 				return GetAttributesForCargos;
 			}
 		}
-		private SendClientRequest GetAttributesForCargos =
+
+		private SendClientRequest SetCargosInOrders =
 			new SendClientRequest(
-					EnumClientRequests.CreatingOrder_GetAttributeForCargos);
+					EnumClientRequests.CreatingOrder_SetCargosInOrders);
+		public ICommand SendRequestSetCargosInOrders
+		{ 
+			get
+			{
+				return SetCargosInOrders;
+			}
+		}
 		
 		public ICommand AddCargo
 		{

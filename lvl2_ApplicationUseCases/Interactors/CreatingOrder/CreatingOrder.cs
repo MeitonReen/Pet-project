@@ -16,6 +16,11 @@ using Layer2_ApplicationUseCases.
 using Layer2_ApplicationUseCases.
 	SimpleStateMachineForInteractors.
 	Data;
+
+using Layer2_ApplicationUseCases.
+	TruncatedDataFromGatewayToDatabaseForLayer2.
+	Shared;
+
 namespace Layer2_ApplicationUseCases.
 	Interactors.
 	CreatingOrder
@@ -47,19 +52,22 @@ namespace Layer2_ApplicationUseCases.
 	public class CreatingOrder : IExecutorOfApplicationUseCase
 	{
 		private SimpleStateMachineForInteractors<
-			EnumClientRequests,
 			object,
 			IExecutorOfClientRequest> StateMachine =
 			new SimpleStateMachineForInteractors<
-				EnumClientRequests,
 				object,
 				IExecutorOfClientRequest>();
-		private IPresenterOfResponsesToClientRequest Presenter;
+		private IPresenterOfResponsesToClientRequest PresenterForStepOne;
+		public ClientLayer2 Client;
 
-		public CreatingOrder(IPresenterOfResponsesToClientRequest presenter)
+		public CreatingOrder(
+			ClientLayer2 client,
+			IPresenterOfResponsesToClientRequest presenter)
 		{
+			PresenterForStepOne = presenter;
+			Client = client;
+
 			RegistrationSteps();
-			Presenter = presenter;
 		}
 
 		public bool Execute(DataOfClientRequest dataOfClientRequest)
@@ -70,7 +78,6 @@ namespace Layer2_ApplicationUseCases.
 				dataOfClientRequest.RequestID,
 				dataOfClientRequest.DataForExecutorClientRequests);
 
-			Presenter.PresentAndSend(dataOfClientRequest.RequestID, Result);
 
 			return true;
 		}
@@ -85,21 +92,37 @@ namespace Layer2_ApplicationUseCases.
 		{
 			StateMachine.RegistrationState(
 				EnumClientRequests.CreatingOrder_GetAttributeForCargos,
-				new StepOne_GetAttributesForCargos(),
+				new StepOne_GetAttributesForCargos(PresenterForStepOne),
 				new EnumAttributesState[]
-					{ 
-						EnumAttributesState.First,
-						EnumAttributesState.Last
-					},
+				{ 
+					EnumAttributesState.First
+				},
 				new EnumClientRequests[][]
 				{
-						new EnumClientRequests[] 
-							{ 
-								EnumClientRequests.CreatingOrder_GetAttributeForCargos
-							}
+					new EnumClientRequests[] 
+					{ 
+						EnumClientRequests.CreatingOrder_GetAttributeForCargos
+					}
 				}
 				
-				);
+			);
+
+			StateMachine.RegistrationState(
+				EnumClientRequests.CreatingOrder_SetCargosInOrders,
+				new StepTwo_SetNewOrderInDatabase(Client),
+				new EnumAttributesState[]
+				{ 
+					EnumAttributesState.Last
+				},
+				new EnumClientRequests[][]
+				{
+					new EnumClientRequests[] 
+					{ 
+						EnumClientRequests.CreatingOrder_GetAttributeForCargos
+					}
+				}
+				
+			);
 		}
 
 	}
