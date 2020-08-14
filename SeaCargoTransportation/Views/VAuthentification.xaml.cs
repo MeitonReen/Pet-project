@@ -10,16 +10,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-using Layer0_Client.DataContextsForBindings.MainMenu;
-
 namespace Layer0_Client.Views
 {
 	/// <summary>
-	/// Логика взаимодействия для VMainMenu.xaml
+	/// Логика взаимодействия для VAuthentification.xaml
 	/// </summary>
-	public partial class VMainMenu : Window
+	public partial class VAuthentification : Window
 	{
-		public VMainMenu()
+		public VAuthentification()
 		{
 			InitializeComponent();
 		}

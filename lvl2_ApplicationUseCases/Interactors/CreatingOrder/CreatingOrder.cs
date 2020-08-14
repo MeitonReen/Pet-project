@@ -58,13 +58,16 @@ namespace Layer2_ApplicationUseCases.
 				object,
 				IExecutorOfClientRequest>();
 		private IPresenterOfResponsesToClientRequest PresenterForStepOne;
+		private IPresenterOfResponsesToClientRequest PresenterForStepThree;
 		public ClientLayer2 Client;
 
 		public CreatingOrder(
 			ClientLayer2 client,
-			IPresenterOfResponsesToClientRequest presenter)
+			IPresenterOfResponsesToClientRequest presenterForStepOne,
+			IPresenterOfResponsesToClientRequest presenterForStepThree)
 		{
-			PresenterForStepOne = presenter;
+			PresenterForStepOne = presenterForStepOne;
+			PresenterForStepThree = presenterForStepThree;
 			Client = client;
 
 			RegistrationSteps();
@@ -101,11 +104,18 @@ namespace Layer2_ApplicationUseCases.
 				{
 					new EnumClientRequests[] 
 					{ 
-						EnumClientRequests.CreatingOrder_GetAttributeForCargos
+						EnumClientRequests.CreatingOrder_GetAttributeForCargos,
+					},
+					new EnumClientRequests[] 
+					{ 
+						EnumClientRequests.CreatingOrder_GetFligthsSchedule
+					},
+					new EnumClientRequests[] 
+					{ 
+						EnumClientRequests.CreatingOrder_GetAttributeForCargos,
+						EnumClientRequests.CreatingOrder_GetFligthsSchedule
 					}
-				}
-				
-			);
+				});
 
 			StateMachine.RegistrationState(
 				EnumClientRequests.CreatingOrder_SetCargosInOrders,
@@ -119,6 +129,32 @@ namespace Layer2_ApplicationUseCases.
 					new EnumClientRequests[] 
 					{ 
 						EnumClientRequests.CreatingOrder_GetAttributeForCargos
+					}
+				}
+				
+			);
+
+			StateMachine.RegistrationState(
+				EnumClientRequests.CreatingOrder_GetFligthsSchedule,
+				new StepThree_GetFlightsSchedule(PresenterForStepThree),
+				new EnumAttributesState[]
+				{ 
+					EnumAttributesState.First
+				},
+				new EnumClientRequests[][]
+				{
+					new EnumClientRequests[] 
+					{ 
+						EnumClientRequests.CreatingOrder_GetAttributeForCargos,
+					},
+					new EnumClientRequests[] 
+					{ 
+						EnumClientRequests.CreatingOrder_GetFligthsSchedule
+					},
+					new EnumClientRequests[] 
+					{ 
+						EnumClientRequests.CreatingOrder_GetAttributeForCargos,
+						EnumClientRequests.CreatingOrder_GetFligthsSchedule
 					}
 				}
 				

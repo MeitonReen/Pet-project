@@ -13,6 +13,13 @@ using Layer1_CommunicatorsBtwLay0AndLay2.
 	TruncatedDataFromGatewayToDatabaseForLayer0;
 using Layer1_CommunicatorsBtwLvl1AndLvl3.
 	DataAboutResponsesToClientRequests;
+using Layer2_ApplicationUseCases.
+	TruncatedDataFromGatewayToDatabaseForLayer2.
+	GetClientOrders;
+using Layer1_CommunicatorsBtwLay0AndLay2.
+	TruncatedDataFromGatewayToDatabaseForLayer0.
+	GetClientOrders;
+using System.Linq;
 
 namespace Layer1_CommunicatorsBtwLvl1AndLvl3.
 	PresentersOfResponsesToClientRequests
@@ -33,11 +40,12 @@ namespace Layer1_CommunicatorsBtwLvl1AndLvl3.
 			EnumClientRequests RequestID,
 			object responseDataFromInteractor)
 		{
-			List<Orders> Orders =
-				(List<Orders>)responseDataFromInteractor;
+			
+			List<OrderLayer2> ClientOrders =
+				(List<OrderLayer2>)responseDataFromInteractor;
 
 			ObservableCollection<OrderLayer0> ResponseDataToReceiverOfPresentedData = 
-				Present(Orders);
+				Present(ClientOrders);
 
 			DataOfResponseToClient PackedResponseDataToReceiverOfPresentedData = 
 				new DataOfResponseToClient();
@@ -50,29 +58,42 @@ namespace Layer1_CommunicatorsBtwLvl1AndLvl3.
 		}
 
 		private ObservableCollection<OrderLayer0> Present(
-			List<Orders> Orders)
+			List<OrderLayer2> Orders)
 		{
-			ObservableCollection<OrderLayer0> PresentationData =
-				new ObservableCollection<OrderLayer0>();
+			ObservableCollection<OrderLayer0> OrdersOut = new
+				ObservableCollection<OrderLayer0>();
 
-			foreach (Orders Order in
-				Orders)
+			foreach (OrderLayer2 Order in Orders)
 			{
-				OrderLayer0 PresentationDataItem =
-					new OrderLayer0()
-					{
-						IDOrder = Order.Idorder,
-						IDClient = Order.Idclient,
-						DateTimeCreate = Order.DateTimeCreate,
-						ReceiptNumberOfOrder = Order.ReceiptNumberOfOrder,
-						IsSelected = false
-					};
+				OrderLayer0 OrderOut = new OrderLayer0();
+				OrderOut.IDOrder = Order.IDOrder;
+				OrderOut.DateTimeCreate = Order.DateTimeCreate;
+				OrderOut.ReceiptNumberOfOrder = Order.ReceiptNumberOfOrder;
 
-				PresentationData.Add(PresentationDataItem);
+				OrderOut.Cargos = new ObservableCollection<CargoLayer2>(
+					Order.Cargos);
+
+				ObservableCollection<OrderOnFlightLayer0> OrderOnFlightsOut =
+					new ObservableCollection<OrderOnFlightLayer0>();
+
+				foreach (OrderOnFlightLayer2 OrderOnFlight in Order.OrderOnFligths)
+				{
+					OrderOnFlightLayer0 OrderOnFlightOut = new OrderOnFlightLayer0();
+					OrderOnFlightOut.ShipNumber = OrderOnFlight.ShipNumber;
+					OrderOnFlightOut.DateTimeOfFlight = OrderOnFlight.DateTimeOfFlight;
+
+					OrderOnFlightOut.StatusesFlight =
+						new ObservableCollection<string>(OrderOnFlight.StatusesFlight);
+
+					OrderOnFlightsOut.Add(OrderOnFlightOut);
+				}
+
+				OrderOut.OrderOnFligths = OrderOnFlightsOut;
+
+				OrdersOut.Add(OrderOut);
 			}
 
-			return PresentationData;
+			return OrdersOut;
 		}
-
 	}
 }

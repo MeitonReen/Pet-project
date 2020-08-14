@@ -8,9 +8,9 @@ namespace Layer2_ApplicationUseCases.
 	public enum EnumClientRequests
 	{
 		CreatingOrder_GetAttributeForCargos,
+		CreatingOrder_GetFligthsSchedule,
 		CreatingOrder_SetCargosInOrders,
 		Get_ClientData,
-		Get_ClientOrders,
-		Get_OrderDetail
+		Get_ClientOrders
 	}
 }

@@ -3,7 +3,9 @@ using System.Windows.Input;
 using System.ComponentModel;
 
 using Layer1_CommunicatorsBtwLay0AndLay2.
-	TruncatedDataFromGatewayToDatabaseForLayer0;
+	TruncatedDataFromGatewayToDatabaseForLayer0.
+	GetClientOrders;
+
 using Layer2_ApplicationUseCases.
 	TruncatedDataFromGatewayToDatabaseForLayer2.
 	Shared;
@@ -37,6 +39,14 @@ namespace Layer0_Client.DataContextsForBindings.MainMenu
 			get
 			{
 				return Comm_GetClientDataAndClientOrders;
+			}
+		}
+
+		public ICommand CreateOrder
+		{
+			get
+			{
+				return new NewOrder();
 			}
 		}
 

@@ -1,0 +1,59 @@
+﻿<Window x:Class="Layer0_Client.Views.OrderDetails"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Layer0_Client.Views"
+        mc:Ignorable="d"
+        Title="OrderDetails" Height="450" Width="800">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto"></RowDefinition>
+			<RowDefinition Height="auto"></RowDefinition>
+			<RowDefinition Height="auto"></RowDefinition>
+			<RowDefinition Height="auto"></RowDefinition>
+			<RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+
+		<TextBlock
+			Grid.Row="0" Grid.Column="0"
+			Text="Номер заказа:"
+		></TextBlock>
+		<TextBlock
+			Grid.Row="0" Grid.Column="1"
+			Text="{Binding IDOrder}"
+		></TextBlock>
+
+		<TextBlock
+			Grid.Row="1" Grid.Column="0"
+			Text="Дата и время оформления заказа:"
+		></TextBlock>
+		<TextBlock
+			Grid.Row="1" Grid.Column="1"
+			Text="{Binding DateTimeCreate}"
+		></TextBlock>
+
+		<TextBlock
+			Grid.Row="2" Grid.Column="0"
+			Text="Номер для получения заказа:"
+		></TextBlock>
+		<TextBlock
+			Grid.Row="2" Grid.Column="1"
+			Text="{Binding ReceiptNumberOfOrder}"
+		></TextBlock>
+
+		<TextBlock
+			Grid.Row="3" Grid.Column="0"
+			Text="Заказ будет отправлен следующими рейсами:"
+		></TextBlock>
+		<ListBox
+			Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+			Style="{Binding BindingOrderDetails}"
+		></ListBox>
+
+	</Grid>
+</Window>

@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
-using Layer2_ApplicationUseCases.
-	InterfacesForStatesOfInteractors;
 using Layer2_ApplicationUseCases.
 	GatewayToDatabase.
 	Context;
-
 using Layer2_ApplicationUseCases.
 	TruncatedDataFromGatewayToDatabaseForLayer2.
 	Shared;
+using System.Linq;
 using Layer2_ApplicationUseCases.GatewayToDatabase;
 using Layer2_ApplicationUseCases.InterfacesForPresenters;
 using Layer2_ApplicationUseCases.DataAboutClientRequest;
+using Layer2_ApplicationUseCases.
+	TruncatedDataFromGatewayToDatabaseForLayer2.
+	GetClientOrders;
+using Layer2_ApplicationUseCases.
+	InterfacesForStatesOfInteractors;
 
 namespace Layer2_ApplicationUseCases.Interactors.ClientOrders.Steps
 {
@@ -28,6 +30,7 @@ namespace Layer2_ApplicationUseCases.Interactors.ClientOrders.Steps
 			ClientLayer2 client,
 			IPresenterOfResponsesToClientRequest presenter)
 		{
+		//Клиент указан временно
 			Client = client;
 			Presenter = presenter;
 		}
@@ -39,11 +42,10 @@ namespace Layer2_ApplicationUseCases.Interactors.ClientOrders.Steps
 
 		public bool Execute(EnumClientRequests RequestID, object dataOfClientRequest)
 		{
-			Clients Client = Database.Clients.FirstOrDefault(Client =>
-				Client.Idclient == this.Client.IDСlient);
-				//Database.Clients.Where(GetClient =>
-				//	GetClient.Idclient == this.Client.IDСlient).ToList();
-			
+			Clients Client =
+				Database.Clients.FirstOrDefault(Client =>
+					Client.Idclient == this.Client.IDСlient);
+					
 			object Result = Client;
 			Presenter.PresentAndSend(RequestID, Result);
 

@@ -31,21 +31,13 @@
 			<Setter.Value>
 				<DataTemplate>
 					<Grid>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="auto"></ColumnDefinition>
-							<ColumnDefinition Width="auto"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
 						<Grid.RowDefinitions>
 							<RowDefinition Height="auto"></RowDefinition>
 							<RowDefinition Height="auto"></RowDefinition>
 						</Grid.RowDefinitions>
 
-						<Button
-                            Grid.Row="0" Grid.Column="1" Grid.RowSpan="3"
-                            Content="Подробнее"
-                        ></Button>
 						<StackPanel
-                            Grid.Row="0" Grid.Column="0"
+                            Grid.Row="0"
                             Orientation="Horizontal">
 							<TextBlock>Номер заказа:</TextBlock>
 							<TextBlock
@@ -54,7 +46,7 @@
                         </StackPanel>
 
 						<StackPanel
-                            Grid.Row="1" Grid.Column="0"
+                            Grid.Row="1"
                             Orientation="Horizontal">
 							<TextBlock>Дата оформления:</TextBlock>
 							<TextBlock

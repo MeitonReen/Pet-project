@@ -10,11 +10,5 @@ namespace Layer2_ApplicationUseCases.
         public string LastName { get; set; }
         public string Patronymic { get; set; }
         public string Email { get; set; }
-
-        public ClientLayer2()
-        {
-            IDСlient = 1;
-        }
-
     }
 }

@@ -4,19 +4,20 @@ using Layer0_Client.
 	InterfacesForProcessingDataContexts;
 using Layer0_Client.DataContextsForBindings.MainMenu;
 using Layer1_CommunicatorsBtwLay0AndLay2.
-	TruncatedDataFromGatewayToDatabaseForLayer0;
+	TruncatedDataFromGatewayToDatabaseForLayer0.
+	GetClientOrders;
 
 namespace Layer0_Client.ProcessingDataContexts.MainMenu
 {
-	public class SetOrdersToDCShowOrders :
+	public class SetOrdersToDCMainMenu :
 		ISetterToDataContextsFromResponseToClient
 	{
-		private DCMainMenu DCShowOrders = null;
+		private DCMainMenu DCMainMenu = null;
 		
-		public SetOrdersToDCShowOrders(
-			DCMainMenu dCShowOrders)
+		public SetOrdersToDCMainMenu(
+			DCMainMenu dCMainMenu)
 		{
-			DCShowOrders = dCShowOrders;
+			DCMainMenu = dCMainMenu;
 		}
 
 		public void Set(object data)
@@ -24,11 +25,12 @@ namespace Layer0_Client.ProcessingDataContexts.MainMenu
 			ObservableCollection<OrderLayer0> Orders =
 			(ObservableCollection<OrderLayer0>)data;
 
-			DCShowOrders.Orders.Clear();
+			DCMainMenu.Orders.Clear();
 			foreach(OrderLayer0 Order in Orders)
 			{
-				DCShowOrders.Orders.Add(Order);
+				DCMainMenu.Orders.Add(Order);
 			}
+			;
 		}
 	}
 }

@@ -42,6 +42,7 @@
 			<Button
 				Grid.Row="1" Grid.Column="0"
 				Content="Новый заказ"
+				Command="{Binding CreateOrder}"
 			></Button>
 			<Button
 				Grid.Row="2" Grid.Column="0"
@@ -49,7 +50,7 @@
 			></Button>
 			<Button
 				Grid.Row="3" Grid.Column="0"
-				Content="GetClientDataAndClientOrders"
+				Content="Обновить"
 				Command="{Binding GetClientDataAndClientOrders}"
 			></Button>
 		</Grid>

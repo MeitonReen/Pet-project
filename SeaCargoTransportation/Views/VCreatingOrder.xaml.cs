@@ -1,5 +1,7 @@
 ﻿
+using System.Configuration;
 using System.Windows;
+using Layer0_Client.DataContextsForBindings.CreateOrder;
 
 namespace Layer0_Client.Views
 {
@@ -9,12 +11,9 @@ namespace Layer0_Client.Views
 	
 	public partial class VCreatingOrder : Window
 	{
-		
 		public VCreatingOrder()
 		{
 			InitializeComponent();
-
 		}
-	
 	}
 }

@@ -16,6 +16,10 @@ namespace Layer0_Client.CommandForViews.Shared
 			SenderClientRequestsToApplication = null;
 
 		private Task Task = null;
+		public ISenderOfClientRequestsToApplication getcc()
+		{
+			return SenderClientRequestsToApplication;
+		}
 
 		public SendClientRequest(EnumClientRequests clientRequestID)
 			: base()

@@ -10,33 +10,99 @@ using Layer1_CommunicatorsBtwLay0AndLay2.CreatorLay1;
 using Layer2_ApplicationUseCases.
 	TruncatedDataFromGatewayToDatabaseForLayer2.
 	Shared;
+using System.Net;
+using System.Diagnostics;
+using Layer0_Client.DataContextsForBindings.Authentification;
+using Layer0_Client.CommandForViews.CreateOrder;
+using Layer0_Client.CommandForViews.Shared;
+using Layer0_Client.CommandForViews.MainMenu;
+using Layer0_Client.InterfacesForClientController;
 
 namespace SeaCargoTransportation
 {
-	/// <summary>
-	/// Interaction logic for App.xaml
-	/// </summary>
+
 	public partial class App : Application
 	{
 		protected override void OnStartup(StartupEventArgs e)
 		{
 			base.OnStartup(e);
 
-			VMainMenu MainView = new VMainMenu();
-			
+			VAuthentification MainView = new VAuthentification();
 			Application.Current.MainWindow = MainView;
+			MainView.Show();
+		}
 
+		
+		public void VMainMenu()
+		{
+			Window VCreatingOrder = Application.Current.MainWindow;
+
+			Application.Current.MainWindow = new VMainMenu();
+
+			VCreatingOrder.Close();
+
+			Application.Current.MainWindow.Show();
+		}
+
+		public void CreatingOrder()
+		{
+			Window VMainMenu = Application.Current.MainWindow;
+
+			Application.Current.MainWindow = new VCreatingOrder();
+
+			VMainMenu.Close();
+
+			DCCreateOrder DCCreateOrder =
+				(DCCreateOrder)
+					Application.Current.MainWindow.Resources["DCCreateOrder"];
+
+			ISenderOfClientRequestsToApplication ClientController =
+				((VMainMenu.Resources["DCMainMenu"] as DCMainMenu).
+					GetClientDataAndClientOrders as GetClientDataAndClientOrders).
+						get_GetClientData().getcc();
+			
+					
+			if (DCCreateOrder != null)
+			{
+				Initialize Initialize =
+					(DCCreateOrder.InitializeCreateOrder as
+						Initialize);
+				Initialize.LinkToSenderOfClientRequestsToApplication(
+					ClientController);
+
+				SendClientRequest SendClientRequest =
+					(DCCreateOrder.SendRequestSetCargosInOrders as
+						SendClientRequest);
+				SendClientRequest.LinkToSenderOfClientRequestsToApplication(
+					ClientController);
+			}
+
+			DCCreateOrder.InitializeCreateOrder.Execute(null);
+
+			Application.Current.MainWindow.Show();
+		}
+
+		public void Authentification()
+		{
+			Window VAuthentification = Application.Current.MainWindow;
+			//Промежуточная версия
+			Application.Current.MainWindow = new VMainMenu();
+			ClientLayer2 Client =
+				(VAuthentification.Resources["DCAuthentification"] as
+					DCAuthentification).Client;
+
+			VAuthentification.Close();
+			
 			SynchronizationContext SynchronizationContext =
 				SynchronizationContext.Current;
-
-			ClientLayer2 Client = new ClientLayer2();//Получен будет из авторизации
-
 			InitializeSeaCargoTransportation(
 				SynchronizationContext,
-				MainView.Resources,
+				Application.Current.MainWindow.Resources,
 				Client);
 
-			MainView.Show();
+			(Application.Current.MainWindow.Resources["DCMainMenu"] as DCMainMenu).
+				GetClientDataAndClientOrders.Execute(null);
+			Application.Current.MainWindow.Show();
 		}
 
 		private void InitializeSeaCargoTransportation(
@@ -45,6 +111,12 @@ namespace SeaCargoTransportation
 			ClientLayer2 client)
 		{
 			
+			if ((DCMainMenu)giverDataContexts["DCMainMenu"] != null)
+			{
+				((DCMainMenu)giverDataContexts["DCMainMenu"]).Client =
+					client;
+			}
+
 			CreatorLay1 CreatorLay1 = new CreatorLay1(client);
 
 			CreatorLay0 CreatorLay0 = new CreatorLay0(

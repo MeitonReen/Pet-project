@@ -8,12 +8,12 @@ using Layer2_ApplicationUseCases.
 
 namespace Layer0_Client.ProcessingDataContexts.MainMenu
 {
-	public class SetDataOfClientToDCShowOrders : 
+	public class SetDataOfClientToDCMainMenu : 
 		ISetterToDataContextsFromResponseToClient
 	{
 		private DCMainMenu DCShowOrders = null;
 		
-		public SetDataOfClientToDCShowOrders(
+		public SetDataOfClientToDCMainMenu(
 			DCMainMenu dCShowOrders)
 		{
 			DCShowOrders = dCShowOrders;

@@ -26,11 +26,11 @@ namespace Layer1_CommunicatorsBtwLay0AndLay2.CreatorLay1
 
 		private CreatingOrder CreatingOrder = null;
 		private AttributesForCargosPresenter AttributesForCargosPresenter = null;
+		private FlightsSchedulePresenter FlightsSchedulePresenter = null;
 
 		private ClientOrders ClientOrders = null;
 		private ClientPresenter ClientPresenter = null;
 		private ClientOrdersPresenter ClientOrdersPresenter = null;
-
 
 		public CreatorLay1(ClientLayer2 client)
 		{
@@ -44,9 +44,13 @@ namespace Layer1_CommunicatorsBtwLay0AndLay2.CreatorLay1
 		{
 			AttributesForCargosPresenter =
 				new AttributesForCargosPresenter(ReceiverDataOfClientCommands);
+			FlightsSchedulePresenter =
+				new FlightsSchedulePresenter(ReceiverDataOfClientCommands);
+
 			CreatingOrder = new CreatingOrder(
 				Client,
-				AttributesForCargosPresenter);
+				AttributesForCargosPresenter,
+				FlightsSchedulePresenter);
 
 			ClientRequestsToApplication.RegistrationOfRequest(
 				EnumClientRequests.CreatingOrder_GetAttributeForCargos,
@@ -54,6 +58,10 @@ namespace Layer1_CommunicatorsBtwLay0AndLay2.CreatorLay1
 
 			ClientRequestsToApplication.RegistrationOfRequest(
 				EnumClientRequests.CreatingOrder_SetCargosInOrders,
+				CreatingOrder);
+
+			ClientRequestsToApplication.RegistrationOfRequest(
+				EnumClientRequests.CreatingOrder_GetFligthsSchedule,
 				CreatingOrder);
 		}
 		private void Create_ClientOrders()

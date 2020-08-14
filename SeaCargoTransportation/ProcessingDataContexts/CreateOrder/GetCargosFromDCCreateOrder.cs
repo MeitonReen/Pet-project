@@ -13,17 +13,23 @@ using Layer1_CommunicatorsBtwLay0AndLay2.
 
 namespace Layer0_Client.ProcessingDataContexts.CreateOrder
 {
-	public class GetFromCargosInOrder : IGetterFromDataContextForClientRequest
+	public class GetCargosFromDCCreateOrder : IGetterFromDataContextForClientRequest
 	{
 		private DCCreateOrder DCCargosInOrder;
 
-		public GetFromCargosInOrder(DCCreateOrder dCCargosInOrders)
+		public GetCargosFromDCCreateOrder(DCCreateOrder dCCargosInOrders)
 		{
 			DCCargosInOrder = dCCargosInOrders;
 		}
 
 		public object Get()
 		{
+			CargosIntoFlightLayer2 CargosIntoFlight = new CargosIntoFlightLayer2();
+			CargosIntoFlight.FlightSchedule =
+				DCCargosInOrder.GettedFlightsSchedule.FirstOrDefault(
+					FlightSchedule =>
+						FlightSchedule.IsSelected);
+		
 			List<CargoLayer2> CargosLayer2 = null;
 			ObservableCollection<CargoLayer0> CargosLayer0 =
 				new ObservableCollection<CargoLayer0>(DCCargosInOrder.Cargos);
@@ -32,7 +38,9 @@ namespace Layer0_Client.ProcessingDataContexts.CreateOrder
 				FilterAttributesIsNotSelected(CargosLayer0);
 			CargosLayer2 = ToCargosLayer2(CargosLayer0);
 
-			return CargosLayer2;
+			CargosIntoFlight.Cargos = CargosLayer2;
+
+			return CargosIntoFlight;
 		}
 		private List<CargoLayer2> ToCargosLayer2(
 			ObservableCollection<CargoLayer0> cargosLayer0)

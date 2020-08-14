@@ -36,12 +36,12 @@ namespace Layer2_ApplicationUseCases.Interactors.ClientOrders
 
 		public ClientOrders(
 			ClientLayer2 client,
-			IPresenterOfResponsesToClientRequest presenterForGetClientData,
-			IPresenterOfResponsesToClientRequest presenterForGetClientOrders)
+			IPresenterOfResponsesToClientRequest presenterForClientData,
+			IPresenterOfResponsesToClientRequest presenterForClientOrders)
 		{
 			Client = client;
-			PresenterForStepOne = presenterForGetClientData;
-			PresenterForStepTwo = presenterForGetClientOrders;
+			PresenterForStepOne = presenterForClientData;
+			PresenterForStepTwo = presenterForClientOrders;
 
 			RegistrationSteps();
 		}
@@ -64,10 +64,6 @@ namespace Layer2_ApplicationUseCases.Interactors.ClientOrders
 					},
 					new EnumClientRequests[] 
 					{ 
-						EnumClientRequests.Get_ClientOrders
-					},
-					new EnumClientRequests[] 
-					{
 						EnumClientRequests.Get_ClientData,
 						EnumClientRequests.Get_ClientOrders
 					}
@@ -84,10 +80,6 @@ namespace Layer2_ApplicationUseCases.Interactors.ClientOrders
 				},
 				new EnumClientRequests[][]
 				{
-					new EnumClientRequests[] 
-					{ 
-						EnumClientRequests.Get_ClientData
-					},
 					new EnumClientRequests[] 
 					{ 
 						EnumClientRequests.Get_ClientOrders

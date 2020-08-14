@@ -16,6 +16,7 @@ using Layer2_ApplicationUseCases.
     Shared;
 using Layer0_Client.CommandForViews.MainMenu;
 using Layer0_Client.ProcessingDataContexts.MainMenu;
+using Layer0_Client.CommandForViews.CreateOrder;
 
 namespace Layer0_Client.CreatorLay0
 {
@@ -63,10 +64,10 @@ namespace Layer0_Client.CreatorLay0
 		}
 		private void InitializeProcessingDataContext_ClientOrders()
 		{
-			SetDataOfClientToDCShowOrders SetDataOfClientToDCShowOrders = new
-				SetDataOfClientToDCShowOrders(DCMainMenu);
-			SetOrdersToDCShowOrders SetOrdersToDCShowOrders = new
-				SetOrdersToDCShowOrders(DCMainMenu);
+			SetDataOfClientToDCMainMenu SetDataOfClientToDCShowOrders = new
+				SetDataOfClientToDCMainMenu(DCMainMenu);
+			SetOrdersToDCMainMenu SetOrdersToDCShowOrders = new
+				SetOrdersToDCMainMenu(DCMainMenu);
 
 			ClientController.RegistrationSettersToDataContextsFromResponseToClient(
 				EnumClientRequests.Get_ClientData,
@@ -81,14 +82,13 @@ namespace Layer0_Client.CreatorLay0
 			//Костылюшка, убрать как можно быстрее
 			if (DCCreateOrder != null)
 			{
-				SendClientRequest SendClientRequest =
-					(DCCreateOrder.SendRequestGetAttributesForCargos as
-						SendClientRequest);
-				SendClientRequest.LinkToSenderOfClientRequestsToApplication(
+				Initialize Initialize =
+					(DCCreateOrder.InitializeCreateOrder as
+						Initialize);
+				Initialize.LinkToSenderOfClientRequestsToApplication(
 					ClientController);
 
-
-				SendClientRequest =
+				SendClientRequest SendClientRequest =
 					(DCCreateOrder.SendRequestSetCargosInOrders as
 						SendClientRequest);
 				SendClientRequest.LinkToSenderOfClientRequestsToApplication(
@@ -105,14 +105,17 @@ namespace Layer0_Client.CreatorLay0
 
 		private void InitializeProcessingDataContext_CreateOrder()
 		{
-			GetFromCargosInOrder GetFromClientCargosInOrders =
-					new GetFromCargosInOrder(DCCreateOrder);
-			GetAttributesForCargoFromCargosInOrder 
+			GetCargosFromDCCreateOrder GetFromClientCargosInOrders =
+					new GetCargosFromDCCreateOrder(DCCreateOrder);
+			GetAttributesForCargoFromDCCreateOrder 
 				GetFromClientAttributesForCargos =
-					new GetAttributesForCargoFromCargosInOrder(DCCreateOrder);
+					new GetAttributesForCargoFromDCCreateOrder(DCCreateOrder);
 			SetAttributesForCargoToDCCreateOrder
 				SetToClientAttributesForCargos =
 					new SetAttributesForCargoToDCCreateOrder(DCCreateOrder);
+			SetFlightScheduleToDCCreateOrder
+				SetFlightScheduleToDCCreateOrder =
+					new SetFlightScheduleToDCCreateOrder(DCCreateOrder);
 
 			ClientController.
 			RegistrationGettersFromDataContextForClientRequest(
@@ -126,6 +129,10 @@ namespace Layer0_Client.CreatorLay0
 			RegistrationSettersToDataContextsFromResponseToClient(
 				EnumClientRequests.CreatingOrder_GetAttributeForCargos,
 				SetToClientAttributesForCargos);
+			ClientController.
+			RegistrationSettersToDataContextsFromResponseToClient(
+				EnumClientRequests.CreatingOrder_GetFligthsSchedule,
+				SetFlightScheduleToDCCreateOrder);
 		}
 			
 	}

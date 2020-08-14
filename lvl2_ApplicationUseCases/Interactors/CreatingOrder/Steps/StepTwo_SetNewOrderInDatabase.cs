@@ -14,6 +14,7 @@ using Layer2_ApplicationUseCases.
 using System;
 using Layer2_ApplicationUseCases.DataAboutClientRequest;
 
+
 namespace Layer2_ApplicationUseCases.Interactors.CreatingOrder.States
 {
 	public class StepTwo_SetNewOrderInDatabase : IExecutorOfClientRequest
@@ -33,9 +34,11 @@ namespace Layer2_ApplicationUseCases.Interactors.CreatingOrder.States
 		}
 
 		public bool Execute(EnumClientRequests RequestID, object dataOfClientRequest)
-		{
-			List<CargoLayer2> Cargos = 
-				(List<CargoLayer2>)dataOfClientRequest;
+		{	
+			CargosIntoFlightLayer2 OrderOnFlight =
+				(CargosIntoFlightLayer2)dataOfClientRequest;
+
+			List<CargoLayer2> Cargos = OrderOnFlight.Cargos;
 
 			Random Random = new Random();
 
@@ -102,7 +105,43 @@ namespace Layer2_ApplicationUseCases.Interactors.CreatingOrder.States
 				};
 				Database.CargosInOrders.Add(CargosInOrders);
 				Database.SaveChanges();
+
+				CargosCharacteristics CargosCharacteristics = new CargosCharacteristics()
+				{
+					Weight = Cargo.CargoCharacteristics.Weight,
+					Length = Cargo.CargoCharacteristics.Length,
+					Wigth = Cargo.CargoCharacteristics.Wigth,
+					Height = Cargo.CargoCharacteristics.Height,
+					Amount = Cargo.CargoCharacteristics.Amount,
+					IdcargosInOrders = CargosInOrders.IdcargosInOrders,
+				};
+				Database.CargosCharacteristics.Add(CargosCharacteristics);
+				Database.SaveChanges();
+
+				List<CargosAttributes> CargosAttributes = new List<CargosAttributes>();
+				foreach(CargoAttributeLayer2 CargoAttribute in Cargo.CargoAttributes)
+				{
+					CargosAttributes CargosAttribute = new CargosAttributes()
+					{
+						IdcargosInOrders = CargosInOrders.IdcargosInOrders,
+						IdattributesForCargos = CargoAttribute.IdattributesForCargos
+					};
+
+					CargosAttributes.Add(CargosAttribute);
+				}
+				Database.CargosAttributes.AddRange(CargosAttributes);
+				Database.SaveChanges();
 			}
+
+			OrdersOnFligths OrdersOnFligths = new OrdersOnFligths()
+			{
+				DateTimeOfFlight = OrderOnFlight.FlightSchedule.DateTimeOfFlight,
+				Idships = OrderOnFlight.FlightSchedule.IDShips,
+				Idclient = Client.IDСlient,
+				Idorder = NewOrder.Idorder
+			};
+			Database.OrdersOnFligths.Add(OrdersOnFligths);
+			Database.SaveChanges();
 
 			return true;
 		}

@@ -9,12 +9,12 @@ using Layer2_ApplicationUseCases.DataAboutClientRequest;
 
 namespace Layer0_Client.ProcessingDataContexts.CreateOrder
 {
-	public class GetAttributesForCargoFromCargosInOrder : 
+	public class GetAttributesForCargoFromDCCreateOrder : 
 		IGetterFromDataContextForClientRequest
 	{
 		private DCCreateOrder DCCargosInOrder;
 
-		public GetAttributesForCargoFromCargosInOrder(
+		public GetAttributesForCargoFromDCCreateOrder(
 			DCCreateOrder dCCargosInOrder)
 		{
 			DCCargosInOrder = dCCargosInOrder;

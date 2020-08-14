@@ -12,6 +12,12 @@ namespace Layer0_Client.CommandForViews.MainMenu
 		private SendClientRequest GetClientOrders = new
 			SendClientRequest(EnumClientRequests.Get_ClientOrders);
 
+			//Временно
+		public SendClientRequest get_GetClientData()
+		{
+			return GetClientData;
+		}
+
 		public void LinkToSenderOfClientRequestsToApplication(
 			ISenderOfClientRequestsToApplication
 				senderClientRequestsToApplication)

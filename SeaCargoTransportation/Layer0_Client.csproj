@@ -11,4 +11,8 @@
     <ProjectReference Include="..\lvl2_ApplicationUseCases\Layer2_ApplicationUseCases.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ResourceDictionaries\Authentification\" />
+  </ItemGroup>
+
 </Project>
