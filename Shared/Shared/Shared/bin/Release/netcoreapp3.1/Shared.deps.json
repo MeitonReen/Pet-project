@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "Shared/1.0.0": {
+        "dependencies": {
+          "SharedDTOs": "1.0.0"
+        },
+        "runtime": {
+          "Shared.dll": {}
+        }
+      },
+      "SharedDTOs/1.0.0": {
+        "runtime": {
+          "SharedDTOs.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Shared/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SharedDTOs/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

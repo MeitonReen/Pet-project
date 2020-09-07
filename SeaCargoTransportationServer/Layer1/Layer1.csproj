@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Templ\InputDataConverters\" />
+    <Folder Include="Templ\PresentersOfDataToOutput\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Layer2\Layer2.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Shared">
+      <HintPath>..\..\Shared\Shared\Shared\bin\Release\netcoreapp3.1\Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="SharedDTOs">
+      <HintPath>..\..\Shared\SharedDTOs\bin\Release\netcoreapp3.1\SharedDTOs.dll</HintPath>
+    </Reference>
+    <Reference Include="SharedDTOsByClient">
+      <HintPath>..\..\Shared\SharedDTOsByClient\bin\Release\netcoreapp3.1\SharedDTOsByClient.dll</HintPath>
+    </Reference>
+    <Reference Include="SharedDTOsByServer">
+      <HintPath>..\..\Shared\SharedDTOsByServer\bin\Release\netcoreapp3.1\SharedDTOsByServer.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,58 @@
+﻿<Window x:Class="Layer0_Client.MainMenu.Views.VOrderDetails"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Layer0_Client.MainMenu.Views"
+        mc:Ignorable="d"
+        Title="OrderDetails" Height="auto" Width="auto"
+		Icon="/Shared/Images/Icon.png">
+
+	<Window.DataContext>
+		<DynamicResource ResourceKey="DCMainMenu"></DynamicResource>
+	</Window.DataContext>
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto"></RowDefinition>
+			<RowDefinition Height="auto"></RowDefinition>
+			<RowDefinition Height="auto"></RowDefinition>
+			<RowDefinition Height="auto"></RowDefinition>
+		</Grid.RowDefinitions>
+
+		<TextBlock
+			Grid.Row="0">
+			<Run Text="Номер заказа:"></Run>
+			<Run Text="{Binding SelectedOrder.IDOrder}"></Run>
+			<LineBreak></LineBreak>
+			<Run Text="Дата и время оформления заказа:"></Run>
+			<Run Text="{Binding SelectedOrder.DateTimeCreate}"></Run>
+			<LineBreak></LineBreak>
+			<Run Text="Номер для получения заказа:"></Run>
+			<Run Text="{Binding SelectedOrder.ReceiptNumberOfOrder}"></Run>
+			<LineBreak></LineBreak>
+			<Run Text="Дата и время рейса:"></Run>
+			<Run Text="{Binding SelectedOrder.OrderOnFligths[0].DateTimeOfFlight}"></Run>
+			<LineBreak></LineBreak>
+			<Run Text="Номер транспортного судна:"></Run>
+			<Run Text="{Binding SelectedOrder.OrderOnFligths[0].ShipNumber}"></Run>
+		</TextBlock>
+
+		<TextBlock
+			Grid.Row="1"
+			Text="Пройденные этапы доставки:"
+		></TextBlock>
+		<ListBox
+			Grid.Row="2"
+			ItemsSource="{Binding SelectedOrder.OrderOnFligths[0].StatusesFlight}"
+		></ListBox>
+
+		<Button
+			Grid.Row="3"
+			HorizontalAlignment="Center"
+			VerticalAlignment="Center"
+			Content="Назад"
+			Command="{Binding BackFromOrderDetails}"
+		></Button>
+	</Grid>
+</Window>

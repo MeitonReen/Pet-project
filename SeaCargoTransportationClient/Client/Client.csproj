@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Authentification\Views\icon.ico" />
+    <None Remove="Authentification\Views\icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="..\..\..\Задачки побольше %2528Impl%2529\SeaCargoTransportation\SeaCargoTransportation\Shared\CommandForViews\CreateOrder\" />
+    <Folder Include="..\..\..\Задачки побольше %2528Impl%2529\SeaCargoTransportation\SeaCargoTransportation\Shared\CommandForViews\Shared\" />
+    <Folder Include="..\..\..\Задачки побольше %2528Impl%2529\SeaCargoTransportation\SeaCargoTransportation\Shared\PresentersClientRequestsToApplication\MainMenu\" />
+    <Folder Include="..\..\..\Задачки побольше %2528Impl%2529\SeaCargoTransportation\SeaCargoTransportation\Shared\ResourceDictionaries\Authentification\" />
+    <Folder Include="Shared\ResourceDictionaries\" />
+    <Folder Include="Templ\CommandsForDataContext\" />
+    <Folder Include="Templ\DataContextForBindingsToWPF\" />
+    <Folder Include="Templ\GettersFromDataContext\" />
+    <Folder Include="Templ\ResourceDictionaries\" />
+    <Folder Include="Templ\SettersToDataContext\" />
+    <Folder Include="Templ\Views\" />
+    <Folder Include="..\..\..\Задачки побольше %2528Impl%2529\SeaCargoTransportation\SeaCargoTransportation\Shared\ResourceDictionaries\CreateOrder\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Shared">
+      <HintPath>..\..\Shared\Shared\Shared\bin\Release\netcoreapp3.1\Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="SharedDTOs">
+      <HintPath>..\..\Shared\SharedDTOs\bin\Release\netcoreapp3.1\SharedDTOs.dll</HintPath>
+    </Reference>
+    <Reference Include="SharedDTOsByClient">
+      <HintPath>..\..\Shared\SharedDTOsByClient\bin\Release\netcoreapp3.1\SharedDTOsByClient.dll</HintPath>
+    </Reference>
+    <Reference Include="SharedDTOsByServer">
+      <HintPath>..\..\Shared\SharedDTOsByServer\bin\Release\netcoreapp3.1\SharedDTOsByServer.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Shared\Images\Icon.png" />
+  </ItemGroup>
+
+</Project>

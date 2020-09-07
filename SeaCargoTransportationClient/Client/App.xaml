@@ -1,0 +1,24 @@
+﻿<Application x:Class="SeaCargoTransportation.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:SeaCargoTransportation"
+
+             >
+	<!--StartupUri="/View/VCreatingOrder.xaml"-->
+	<Application.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary
+					Source="/Authentification/ResourceDictionaries/CreateDCAuthentification.xaml"
+				></ResourceDictionary>
+				<ResourceDictionary
+					Source="/MainMenu/ResourceDictionaries/CreateDCMainMenu.xaml"
+				></ResourceDictionary>
+				<ResourceDictionary
+					Source="/CreatingOrder/ResourceDictionaries/CreateDCCreatingOrder.xaml"
+				></ResourceDictionary>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Application.Resources>
+
+</Application>

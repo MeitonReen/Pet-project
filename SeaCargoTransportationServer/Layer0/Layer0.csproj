@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Layer1\Layer1.csproj" />
+    <ProjectReference Include="..\Layer2\Layer2.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Shared">
+      <HintPath>..\..\Shared\Shared\Shared\obj\Release\netcoreapp3.1\Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="SharedDTOs">
+      <HintPath>..\..\Shared\SharedDTOs\bin\Release\netcoreapp3.1\SharedDTOs.dll</HintPath>
+    </Reference>
+    <Reference Include="SharedDTOsByClient">
+      <HintPath>..\..\Shared\SharedDTOsByClient\obj\Release\netcoreapp3.1\SharedDTOsByClient.dll</HintPath>
+    </Reference>
+    <Reference Include="SharedDTOsByServer">
+      <HintPath>..\..\Shared\SharedDTOsByServer\bin\Release\netcoreapp3.1\SharedDTOsByServer.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

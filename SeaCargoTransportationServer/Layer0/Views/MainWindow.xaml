@@ -1,0 +1,48 @@
+﻿<Window x:Class="SeaCargoTransportationBL.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SeaCargoTransportationBL"
+        xmlns:Server="clr-namespace:Layer0.DataContext"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="200" Width="200">
+	<Window.Resources>
+		<Server:DCServer
+            x:Key="DCServer"
+        ></Server:DCServer>
+    </Window.Resources>
+
+	<Grid DataContext="{DynamicResource DCServer}">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+		<Button
+            Grid.Column="0"
+            VerticalAlignment="Center" HorizontalAlignment="Center"
+            Content="Пуск"
+            Command="{Binding ServerStart}"
+        ></Button>
+
+		<Button
+            Grid.Column="1"
+            VerticalAlignment="Center" HorizontalAlignment="Center"
+            Content="Стоп"
+            Command="{Binding ServerStop}"
+        ></Button>
+
+		<TextBlock
+            Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+            HorizontalAlignment="Center"
+            >
+            <Run Text="Сервер включён?:"></Run>
+            <Run Text="{Binding ServerStatus}"></Run>
+        </TextBlock>
+	</Grid>
+</Window>
