@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Layer0_Client.MainMenu.Views"
         mc:Ignorable="d"
-        Title="SeaCargoTransportation" Height="300" Width="800"
+        Title="Главное меню" Width="800"
+		SizeToContent="Height"
+		WindowStartupLocation="CenterScreen"
 		Icon="/Shared/Images/Icon.png">
 
 
@@ -14,6 +16,9 @@
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary
 					Source="/MainMenu/ResourceDictionaries/BindingOrders.xaml"
+				></ResourceDictionary>
+				<ResourceDictionary
+					Source="/Shared/ResourceDictionaries/MainTheme.xaml"
 				></ResourceDictionary>
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
@@ -85,19 +90,16 @@
 				<TextBlock
 					Grid.Row="0"
 					Grid.Column="0"
-					Margin="5"
 					Text="{Binding Client.FirstName}"
 				></TextBlock>
 				<TextBlock
 					Grid.Row="0"
 					Grid.Column="1"
-					Margin="5"
 					Text="{Binding Client.Patronymic}"
 				></TextBlock>
 				<TextBlock
 					Grid.Row="0"
 					Grid.Column="2"
-					Margin="5"
 					Text="{Binding Client.LastName}"
 				></TextBlock>
 				<StackPanel
@@ -105,11 +107,9 @@
 					Orientation="Horizontal"
 				>
 					<TextBlock
-						Margin="5"
 						Text="Email:"
 					></TextBlock>
 					<TextBlock
-						Margin="5"
 						Text="{Binding Client.Email}"
 					></TextBlock>
 				</StackPanel>
@@ -125,7 +125,7 @@
 			<ListBox
 				Grid.Row="2" Grid.Column="0"
 				SelectedValue="{Binding SelectedOrder, Mode=TwoWay}"
-				Style="{StaticResource BindingOrders}"	
+				Style="{StaticResource BindingOrders}"
 			></ListBox>
 			<!--#endregion-->
 		</Grid>

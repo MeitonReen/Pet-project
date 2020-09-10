@@ -15,7 +15,8 @@ namespace Layer1.MainMenu.PresentersOfDataToOutput
 				IDСlient = Client.Idclient,
 				FirstName = Client.FirstName,
 				LastName = Client.LastName,
-				Patronymic = Client.Patronymic
+				Patronymic = Client.Patronymic,
+				Email = Client.Email
 			};
 
 			return ClientLayer2;

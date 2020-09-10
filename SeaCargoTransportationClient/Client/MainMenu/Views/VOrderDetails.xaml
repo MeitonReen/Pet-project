@@ -5,12 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Layer0_Client.MainMenu.Views"
         mc:Ignorable="d"
-        Title="OrderDetails" Height="auto" Width="auto"
+        Title="Детали заказа"
+		SizeToContent="WidthAndHeight"
+		WindowStartupLocation="CenterScreen"
 		Icon="/Shared/Images/Icon.png">
 
 	<Window.DataContext>
 		<DynamicResource ResourceKey="DCMainMenu"></DynamicResource>
 	</Window.DataContext>
+
+	<Window.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary
+					Source="/Shared/ResourceDictionaries/MainTheme.xaml"
+				></ResourceDictionary>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Window.Resources>
 
 	<Grid>
 		<Grid.RowDefinitions>
@@ -20,8 +32,7 @@
 			<RowDefinition Height="auto"></RowDefinition>
 		</Grid.RowDefinitions>
 
-		<TextBlock
-			Grid.Row="0">
+		<TextBlock Grid.Row="0">
 			<Run Text="Номер заказа:"></Run>
 			<Run Text="{Binding SelectedOrder.IDOrder}"></Run>
 			<LineBreak></LineBreak>

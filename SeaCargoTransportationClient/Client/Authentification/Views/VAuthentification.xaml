@@ -4,7 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		mc:Ignorable="d"
-		Title="Аутентификация" Height="150" Width="300"
+		Title="Аутентификация"
+		SizeToContent="Height"
+		Width="300"
+		WindowStartupLocation="CenterScreen"
 		Icon="/Shared/Images/Icon.png">
 
 	<Window.Resources>
@@ -12,6 +15,9 @@
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary
 					Source="/Authentification/ResourceDictionaries/CreateDCAuthentification.xaml"
+				></ResourceDictionary>
+				<ResourceDictionary
+					Source="/Shared/ResourceDictionaries/MainTheme.xaml"
 				></ResourceDictionary>
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
@@ -30,27 +36,27 @@
 	
 		<TextBlock
 			Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"
-			HorizontalAlignment="Right" Margin="5" Text="Логин:"
+			HorizontalAlignment="Right" Text="Логин:"
 		></TextBlock>
 		<TextBlock
 			
 			Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"
-			HorizontalAlignment="Right"	Margin="5" Text="Пароль:">
+			HorizontalAlignment="Right"	Text="Пароль:">
 		</TextBlock>
 		<TextBox
-			Grid.Row="0" Grid.Column="1" Margin="5" VerticalAlignment="Center"
+			Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"
 			Text="{Binding Login}"
 		></TextBox>
 		<TextBox
-			Grid.Row="1" Grid.Column="1" Margin="5" VerticalAlignment="Center"
+			Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"
 			Text="{Binding Password}"
 		></TextBox>
 
-		<Button 
-			Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="5" Content="Войти"
+		<Button
+			Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Content="Войти"
 			HorizontalAlignment="Center"
-			Command="{Binding AuthentificationApp}"
-		></Button>
+			Command="{Binding AuthentificationApp}">
+		</Button>
 
 	</Grid>
 </Window>

@@ -1,37 +1,37 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     >
-	<Style x:Key="BindingCargoAttributes">
-		<Setter 
-				Property="ListBox.DataContext"
-				Value="{Binding SelectedCargo}">
+
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary
+			Source="/Shared/ResourceDictionaries/MainTheme.xaml"
+		></ResourceDictionary>
+	</ResourceDictionary.MergedDictionaries>
+
+	<Style x:Key="BindingCargoAttributes"
+		TargetType="ListBox" BasedOn="{StaticResource {x:Type ListBox}}">
+		<Setter Property="DataContext" Value="{Binding SelectedCargo}"></Setter>
+		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"></Setter>
+		<Setter Property="SelectionMode" Value="Multiple"></Setter>
+		<Setter Property="ItemContainerStyle">
+			<Setter.Value>
+				<Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+					<Style.Setters>
+						<Setter Property="IsSelected" Value="{Binding IsSelected, Mode = TwoWay}"></Setter>
+					</Style.Setters>
+				</Style>
+			</Setter.Value>
 		</Setter>
-	
-		<Setter
-				Property="ListBox.ItemsSource"
-				Value="{Binding CargoAttributes, Mode = TwoWay}"
-		></Setter>
-		<Setter
-				Property="ListBox.ItemTemplate">
+		<Setter Property="ItemsSource" Value="{Binding CargoAttributes, Mode = TwoWay}"></Setter>
+		<Setter Property="ItemTemplate">
 			<Setter.Value>
 				<DataTemplate>
-					<Grid>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="auto"></ColumnDefinition>
-							<ColumnDefinition Width="*"></ColumnDefinition>
-						</Grid.ColumnDefinitions>
-
-						<CheckBox
-							Grid.Column="0"
-							IsChecked="{Binding IsSelected, Mode = TwoWay}"
-							HorizontalAlignment="Center"
-							VerticalAlignment="Center"
-						></CheckBox>
-						<TextBlock
-							Grid.Column="1"
-							Text="{Binding Name}"
-						></TextBlock>
-					</Grid>
+					<DockPanel LastChildFill="True">
+						<CheckBox DockPanel.Dock="Left" VerticalAlignment="Top"
+							IsChecked="{Binding IsSelected, Mode = TwoWay}">
+						</CheckBox>
+						<TextBlock DockPanel.Dock="Left" TextWrapping="Wrap" Text="{Binding Name}"></TextBlock>
+					</DockPanel>
 				</DataTemplate>
 			</Setter.Value>
 		</Setter>

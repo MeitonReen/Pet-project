@@ -16,7 +16,6 @@
     <Folder Include="..\..\..\Задачки побольше %2528Impl%2529\SeaCargoTransportation\SeaCargoTransportation\Shared\CommandForViews\Shared\" />
     <Folder Include="..\..\..\Задачки побольше %2528Impl%2529\SeaCargoTransportation\SeaCargoTransportation\Shared\PresentersClientRequestsToApplication\MainMenu\" />
     <Folder Include="..\..\..\Задачки побольше %2528Impl%2529\SeaCargoTransportation\SeaCargoTransportation\Shared\ResourceDictionaries\Authentification\" />
-    <Folder Include="Shared\ResourceDictionaries\" />
     <Folder Include="Templ\CommandsForDataContext\" />
     <Folder Include="Templ\DataContextForBindingsToWPF\" />
     <Folder Include="Templ\GettersFromDataContext\" />

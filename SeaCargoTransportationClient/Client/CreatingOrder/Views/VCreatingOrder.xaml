@@ -4,9 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		mc:Ignorable="d"
-        Title="VCreatingOrder" Height="400" Width="800"
+        Title="Новый заказ"
+		SizeToContent="Height"
+		Width="570"
+		WindowStartupLocation="CenterScreen"
 		Icon="/Shared/Images/Icon.png">
-
 	<Window.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
@@ -19,196 +21,136 @@
 				<ResourceDictionary
 					Source="/CreatingOrder/ResourceDictionaries/BindingFligthsSchedule.xaml"
 				></ResourceDictionary>
+				<ResourceDictionary
+					Source="/Shared/ResourceDictionaries/MainTheme.xaml"
+				></ResourceDictionary>
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</Window.Resources>
 
 	<Grid DataContext="{DynamicResource DCCreatingOrder}">
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*"></ColumnDefinition>
+			<ColumnDefinition Width="auto"></ColumnDefinition>
+			<ColumnDefinition MinWidth="250"></ColumnDefinition>
 			<ColumnDefinition Width="auto"></ColumnDefinition>
 		</Grid.ColumnDefinitions>
-
 		<Grid.RowDefinitions>
-			<RowDefinition Height="*"></RowDefinition>
-			<RowDefinition Height="*"></RowDefinition>
 			<RowDefinition Height="auto"></RowDefinition>
 			<RowDefinition Height="auto"></RowDefinition>
-			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="auto"></RowDefinition>
+			<RowDefinition Height="auto"></RowDefinition>
 		</Grid.RowDefinitions>
 
-		<!--#region Кнопки функций-->
-		<Grid
-			Grid.Row="0" Grid.Column="1">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*"></ColumnDefinition>
-			</Grid.ColumnDefinitions>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="*"></RowDefinition>
-				<RowDefinition Height="*"></RowDefinition>
-				<RowDefinition Height="*"></RowDefinition>
-			</Grid.RowDefinitions>
-			
-			<Button
-				Grid.Row="0"
-				HorizontalAlignment="Center"
-				VerticalAlignment="Center"
-				Content="Добавить"
-				Command="{Binding AddCargo}"
-			></Button>
-			<Button
-				Grid.Row="1"
-				HorizontalAlignment="Center"
-				VerticalAlignment="Center"
-				Content="Удалить"
-				Command="{Binding RemoveCargo}"
-			></Button>
-			<Button
-				Grid.Row="2"
-				HorizontalAlignment="Center"
-				VerticalAlignment="Center"
-				Content="Обновить расписание рейсов"
-				Command="{Binding RefreshFlightSchedule}"
-			></Button>
-		</Grid>
+		<!--#region Регистрация товара-->
+		<DockPanel LastChildFill="True" x:Name="RegistrationCargo" Grid.Row="0" Grid.Column="0">
+			<TextBlock DockPanel.Dock="Top" Text="Регистрация товара:"></TextBlock>
+			<Grid DockPanel.Dock="Top">
+				<Grid.Resources>
+					<Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+						<Setter Property="Margin" Value="1"></Setter>
+					</Style>
+					<Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+						<Setter Property="HorizontalAlignment" Value="Right"></Setter>
+					</Style>
+				</Grid.Resources>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="auto"></ColumnDefinition>
+					<ColumnDefinition Width="*"></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="auto"></RowDefinition>
+					<RowDefinition Height="auto"></RowDefinition>
+					<RowDefinition Height="auto"></RowDefinition>
+					<RowDefinition Height="auto"></RowDefinition>
+					<RowDefinition Height="auto"></RowDefinition>
+				</Grid.RowDefinitions>
+
+				<TextBlock Grid.Row="0" Grid.Column="0" Text="Вес:"></TextBlock>
+				<TextBox Grid.Row="0" Grid.Column="1"
+					DataContext="{Binding SelectedCargo.CargoCharacteristics}"
+					Text="{Binding Weight, Mode = TwoWay}"></TextBox>
+				<TextBlock Grid.Row="1" Grid.Column="0"  Text="Длина:"></TextBlock>
+				<TextBox Grid.Row="1" Grid.Column="1"
+					DataContext="{Binding SelectedCargo.CargoCharacteristics}"
+					Text="{Binding Length, Mode = TwoWay}"></TextBox>
+				<TextBlock Grid.Row="2" Grid.Column="0" Text="Ширина:"></TextBlock>
+				<TextBox Grid.Row="2" Grid.Column="1"
+					DataContext="{Binding SelectedCargo.CargoCharacteristics}"
+					Text="{Binding Wigth, Mode = TwoWay}"></TextBox>
+				<TextBlock Grid.Row="3" Grid.Column="0" Text="Высота:"></TextBlock>
+				<TextBox Grid.Row="3" Grid.Column="1"
+					DataContext="{Binding SelectedCargo.CargoCharacteristics}"
+					Text="{Binding Height, Mode = TwoWay}"></TextBox>
+				<TextBlock Grid.Row="4" Grid.Column="0" Text="Объём:"></TextBlock>
+				<TextBox Grid.Row="4" Grid.Column="1"
+					DataContext="{Binding SelectedCargo.CargoCharacteristics}"
+					Text="{Binding Amount, Mode = TwoWay}"></TextBox>
+			</Grid>
+		</DockPanel>
 		<!--#endregion-->
 
-		<!--#region Регистрация товара-->
-		<Grid
-			Grid.Row="0" Grid.Column="0"
-	>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="auto"></ColumnDefinition>
-				<ColumnDefinition Width="*"></ColumnDefinition>
-				<ColumnDefinition Width="*"></ColumnDefinition>
-			</Grid.ColumnDefinitions>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="*"></RowDefinition>
-				<RowDefinition Height="*"></RowDefinition>
-				<RowDefinition Height="*"></RowDefinition>
-				<RowDefinition Height="*"></RowDefinition>
-				<RowDefinition Height="*"></RowDefinition>
-				<RowDefinition Height="*"></RowDefinition>
-			</Grid.RowDefinitions>
-				<TextBlock
-			Grid.Row="0" Grid.Column="0"
-			Grid.ColumnSpan="3"
-			Text="Регистрация товара:"
-		></TextBlock>
-		<TextBlock
-			Grid.Row="0" Grid.Column="2"
-			Text="Выберите атрибуты товара:"
-		></TextBlock>
-		<ListBox
-			Grid.Row="1" Grid.Column="2"
-			Grid.RowSpan="5"
+		<!--#region Регистрация товара. Атрибуты товара-->
+		<DockPanel x:Name="CargoAttributes" LastChildFill="True" Grid.Row="0" Grid.Column="1"
+			Height="{Binding ElementName=RegistrationCargo, Path=ActualHeight}">
+			<TextBlock DockPanel.Dock="Top"
+				HorizontalAlignment="Left" Text="Выберите атрибуты товара:"></TextBlock>
+			<ListBox DockPanel.Dock="Top" Style="{StaticResource BindingCargoAttributes}"></ListBox>
+		</DockPanel>
+		<!--#endregion-->
 
-			Style="{StaticResource BindingCargoAttributes}"
-
-		></ListBox>
-
-			<TextBlock
-			Grid.Row="1" Grid.Column="0"
-			Text="Вес:"
-		></TextBlock>
-		<TextBox
-			Grid.Row="1" Grid.Column="1"
-			DataContext="{Binding SelectedCargo.CargoCharacteristics}"
-			Text="{Binding Weight, Mode = TwoWay}"
-		></TextBox>
-		<TextBlock
-			Grid.Row="2" Grid.Column="0"
-			Text="Длина:"
-		></TextBlock>
-			<TextBox
-			Grid.Row="2" Grid.Column="1"
-			DataContext="{Binding SelectedCargo.CargoCharacteristics}"
-			Text="{Binding Length, Mode = TwoWay}"
-		></TextBox>
-				<TextBlock
-			Grid.Row="3" Grid.Column="0"
-			Text="Ширина:"
-		></TextBlock>
-			<TextBox
-			Grid.Row="3" Grid.Column="1"
-			DataContext="{Binding SelectedCargo.CargoCharacteristics}"
-			Text="{Binding Wigth, Mode = TwoWay}"
-		></TextBox>
-		<TextBlock
-			Grid.Row="4" Grid.Column="0"
-			Text="Высота:"
-		></TextBlock>
-			<TextBox
-			Grid.Row="4" Grid.Column="1"
-			DataContext="{Binding SelectedCargo.CargoCharacteristics}"
-			Text="{Binding Height, Mode = TwoWay}"
-		></TextBox>
-		<TextBlock
-			Grid.Row="5" Grid.Column="0"
-			Text="Объём:"
-		></TextBlock>
-		<TextBox
-			Grid.Row="5" Grid.Column="1"
-			DataContext="{Binding SelectedCargo.CargoCharacteristics}"
-			Text="{Binding Amount, Mode = TwoWay}"
-		></TextBox>
-			</Grid>
+		<!--#region Кнопки функций-->
+		<StackPanel Grid.Row="0" Grid.Column="2">
+			<Button HorizontalAlignment="Stretch" VerticalAlignment="Center"
+				Content="Назад"
+				Command="{Binding Back}"></Button>
+			<Button HorizontalAlignment="Stretch" VerticalAlignment="Center"
+				Content="Добавить товар"
+				Command="{Binding AddCargo}"></Button>
+			<Button HorizontalAlignment="Stretch" VerticalAlignment="Center"
+				Content="Удалить товар"
+				Command="{Binding RemoveCargo}"></Button>
+			<Button HorizontalAlignment="Stretch" VerticalAlignment="Center"
+				Content="Создать заказ"
+				Command="{Binding CreateOrderAndCloseView}"></Button>
+		</StackPanel>
 		<!--#endregion-->
 
 		<!--#region Товары в заказе-->
-		<Grid
-			Grid.Row="1" Grid.Column="0"
-			Grid.ColumnSpan="2">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="auto"></RowDefinition>
-				<RowDefinition Height="*"></RowDefinition>
-			</Grid.RowDefinitions>
-			<TextBlock
-			Grid.Row="0" Grid.Column="0"
-			Text="Товары в заказе:"
-			></TextBlock>
-			<ListBox
-				Grid.Row="1" Grid.Column="0"
-				SelectedItem="{Binding SelectedCargo, Mode=TwoWay}"
-				Style="{StaticResource BindingCargos}"
-			>
-			</ListBox>
-		</Grid>
+		<StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Vertical">
+			<TextBlock Text="Товары в заказе:"></TextBlock>
+			<ListBox SelectedItem="{Binding SelectedCargo, Mode=TwoWay}"
+				Style="{StaticResource BindingCargos}"></ListBox>
+		</StackPanel>
 		<!--#endregion-->
 
-		<!--#region Кнопки завершения оформления заказа-->
-		<Grid
-		Grid.Row="2" Grid.Column="0"
-		Grid.ColumnSpan="2"
-	>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*"></ColumnDefinition>
-				<ColumnDefinition Width="*"></ColumnDefinition>
-			</Grid.ColumnDefinitions>
-		<Button
-			Grid.Column="0"
-			HorizontalAlignment="Center"
-			Content="Назад"
-			Command="{Binding Back}"
-		></Button>
-				<Button
-			Grid.Column="1"
-			HorizontalAlignment="Center"
-			Content="Создать заказ"
-			Command="{Binding CreateOrderAndCloseView}"
-		></Button>
-			</Grid>
+		<!--#region Даты доставки-->
+		<TextBlock Grid.Row="2" Grid.Column="0" Text="Выберите дату доставки:"></TextBlock>
+		<StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal">
+			<Button VerticalAlignment="Top" Margin="1" Padding="0"
+				Command="{Binding RefreshFlightSchedule}">
+				<Viewbox Stretch="Uniform" >
+					<Canvas Width="20" Height="20">
+						<Canvas.RenderTransform>
+							<ScaleTransform ScaleX="0.3" ScaleY="0.3"></ScaleTransform>
+						</Canvas.RenderTransform>
+						<Path Fill="Transparent" StrokeThickness="3"
+							Stroke="{StaticResource BorderColor}">
+							<Path.Data>
+								<PathGeometry Figures="m32.5 4.999c-5.405 0-10.444 1.577-14.699 4.282l-5.75-5.75v16.11h16.11l-6.395-6.395c3.18-1.787 6.834-2.82 10.734-2.82 12.171 0 22.073 9.902 22.073 22.074 0 2.899-0.577 5.664-1.599 8.202l4.738 2.762c1.47-3.363 2.288-7.068 2.288-10.964 0-15.164-12.337-27.501-27.5-27.501z" FillRule="NonZero"/>
+							</Path.Data>
+						</Path>
+						<Path Fill="Transparent" StrokeThickness="3"
+							Stroke="{StaticResource BorderColor}">
+							<Path.Data>
+								<PathGeometry Figures="m43.227 51.746c-3.179 1.786-6.826 2.827-10.726 2.827-12.171 0-22.073-9.902-22.073-22.073 0-2.739 0.524-5.35 1.439-7.771l-4.731-2.851c-1.375 3.271-2.136 6.858-2.136 10.622 0 15.164 12.336 27.5 27.5 27.5 5.406 0 10.434-1.584 14.691-4.289l5.758 5.759v-16.112h-16.111l6.389 6.388z" FillRule="NonZero"/>
+							</Path.Data>
+						</Path>
+					</Canvas>
+				</Viewbox>
+			</Button>
+			<ListBox Style="{StaticResource BindingFligthsSchedule}"></ListBox>
+		</StackPanel>
 		<!--#endregion-->
-
-		<TextBlock
-			Grid.Row="3" Grid.Column="0"
-			Text="Выберите дату доставки:"
-		></TextBlock>
-
-		<ListBox
-			Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
-			Style="{StaticResource BindingFligthsSchedule}"
-		></ListBox>
 	</Grid>
 </Window>
 
