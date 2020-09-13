@@ -1,5 +1,4 @@
-﻿
-using Shared;
+﻿using Shared;
 
 namespace Layer0_Client.Shared.ClientPresenters
 {

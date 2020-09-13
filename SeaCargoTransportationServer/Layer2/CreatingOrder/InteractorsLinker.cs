@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 using Layer2.CreatingOrder.Interactors;
 using Layer2.Shared;

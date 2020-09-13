@@ -1,5 +1,5 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+
 using Shared;
 using SharedDTOs.DataAboutClientRequests;
 

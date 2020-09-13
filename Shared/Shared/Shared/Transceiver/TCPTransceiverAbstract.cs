@@ -1,7 +1,7 @@
 ﻿using System.Net.Sockets;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace Layer0_Client.Shared.Transceiver
+namespace Shared.Transceiver
 {
 	public abstract class TCPTransceiverAbstract : ITransceiver
 	{
@@ -19,7 +19,6 @@ namespace Layer0_Client.Shared.Transceiver
 		{
 			CreateBF();
 			object ReceivedData = BF.Deserialize(GetStream());
-
 			return ReceivedData;
 		}
 

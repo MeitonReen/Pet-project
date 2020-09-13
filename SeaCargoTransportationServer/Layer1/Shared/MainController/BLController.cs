@@ -1,11 +1,12 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
+
 using Layer1.Shared.InputDataConverters;
 using Layer1.Shared.PresentersOfDataToOutput;
-using Layer1.Shared.Transceiver;
 using Layer2.Shared.Interactors;
+using Shared;
 using Shared.Dictionary;
+using Shared.Transceiver;
 using SharedDTOs.DataAboutClientRequests;
 
 namespace Layer1.Shared.MainController

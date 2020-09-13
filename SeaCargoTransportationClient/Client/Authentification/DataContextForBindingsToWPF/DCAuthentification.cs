@@ -1,5 +1,5 @@
-﻿
-using System;
+﻿using System;
+using System.ComponentModel;
 using System.Windows.Input;
 
 using Layer0_Client.Authentification.CommandsForDataContexts;
@@ -8,7 +8,7 @@ using SharedDTOs.DataAboutClientRequests;
 
 namespace Layer0_Client.Authentification.DataContextForBindingsToWPF
 {
-	public class DCAuthentification : AbstractDataContext
+	public class DCAuthentification : AbstractDataContext, INotifyPropertyChanged
 	{
 		#region Свойства
 		public string Login { get; set; } = "";
@@ -26,7 +26,7 @@ namespace Layer0_Client.Authentification.DataContextForBindingsToWPF
 		#endregion
 
 		#region Служебное
-		private bool _Connected = false;
+		private bool _Connected = true;
 		public bool Connected
 		{
 			get
@@ -37,6 +37,7 @@ namespace Layer0_Client.Authentification.DataContextForBindingsToWPF
 			{
 				_Connected = value;
 				ChangeConnectionStatus?.Invoke(this, _Connected);
+				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Connected"));
 			}
 		}
 
@@ -54,6 +55,7 @@ namespace Layer0_Client.Authentification.DataContextForBindingsToWPF
 		}
 
 		public event EventHandler<bool> ChangeConnectionStatus;
+		public event PropertyChangedEventHandler PropertyChanged;
 		#endregion
 	}
 }

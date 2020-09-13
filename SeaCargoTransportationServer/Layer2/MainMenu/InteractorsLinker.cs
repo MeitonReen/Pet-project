@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 using Layer2.MainMenu.Interactors;
 using Layer2.Shared.SimpleStateMachine;

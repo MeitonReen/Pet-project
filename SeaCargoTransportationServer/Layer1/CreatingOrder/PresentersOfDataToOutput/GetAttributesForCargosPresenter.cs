@@ -1,6 +1,6 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+
 using Layer1.Shared.PresentersOfDataToOutput;
 using Layer2.Shared.GatewayToDatabase;
 using SharedDTOsByClient.CreatingOrder;

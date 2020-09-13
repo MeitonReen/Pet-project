@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Layer2.Shared.GatewayToDatabase;
+using Layer2.Shared.GatewayToDatabase.Context;
 using Layer2.Shared.Interactors;
 
 namespace Layer2.CreatingOrder.Interactors
@@ -11,13 +12,12 @@ namespace Layer2.CreatingOrder.Interactors
 	{
 		public override object Execute(object dataFromInputConverter)
 		{
-			using (Database = GetDataBase())
+			using (SeaCargoTransportationContext Database = GetDataBase())
 			{
 				List<FlightsSchedule> FlightsSchedule =
-					Database.FlightsSchedule.Where(FlightSchedule =>
+					Database?.FlightsSchedule.Where(FlightSchedule =>
 						FlightSchedule.DateTimeOfFlight >= DateTime.Now).ToList();
 				
-				Database = null;
 				return FlightsSchedule;
 			}
 		}

@@ -1,5 +1,4 @@
-﻿
-using Layer1.Shared.InputDataConverters;
+﻿using Layer1.Shared.InputDataConverters;
 using SharedDTOsByServer.CreatingOrder;
 
 namespace Layer1.CreatingOrder.InputDataConverters

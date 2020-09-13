@@ -1,8 +1,8 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 using Layer2.Shared.GatewayToDatabase;
+using Layer2.Shared.GatewayToDatabase.Context;
 using Layer2.Shared.Interactors;
 
 namespace Layer2.CreatingOrder.Interactors
@@ -11,12 +11,11 @@ namespace Layer2.CreatingOrder.Interactors
 	{
 		public override object Execute(object dataFromInputConverter)
 		{
-			using (GetDataBase())
+			using (SeaCargoTransportationContext Database = GetDataBase())
 			{
 				List<AttributesForCargos> AttributesForCargos =
-					Database.AttributesForCargos.ToList();
+					Database?.AttributesForCargos.ToList();
 				
-				Database = null;
 				return AttributesForCargos;
 			}
 		}

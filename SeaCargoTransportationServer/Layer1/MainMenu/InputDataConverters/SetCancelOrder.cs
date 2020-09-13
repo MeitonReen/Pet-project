@@ -1,7 +1,4 @@
 ﻿using Layer1.Shared.InputDataConverters;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Layer1.MainMenu.InputDataConverters
 {

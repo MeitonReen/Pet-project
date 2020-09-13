@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Net.Sockets;
 
-namespace Layer0_Client.Shared.Transceiver
+namespace Shared.Transceiver
 {
 	public class TCPListener : TCPTransceiverAbstract
 	{

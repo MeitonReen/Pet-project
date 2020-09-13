@@ -1,5 +1,4 @@
-﻿
-using Layer0_Client.Shared.SettersToDataContext;
+﻿using Layer0_Client.Shared.SettersToDataContext;
 using Layer0_Client.MainMenu.DataContextForBindingsToWPF;
 using SharedDTOsByServer.MainMenu;
 

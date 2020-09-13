@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
+
 using Layer0_Client.CreatingOrder.DataContextForBindingsToWPF;
 using Layer0_Client.Shared.CommandsForDataContexts;
 using SharedDTOsByClient.CreatingOrder;

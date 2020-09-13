@@ -32,6 +32,7 @@
 			<RowDefinition Height="*"></RowDefinition>
 			<RowDefinition Height="*"></RowDefinition>
 			<RowDefinition Height="auto"></RowDefinition>
+			<RowDefinition Height="auto"></RowDefinition>
 		</Grid.RowDefinitions>
 	
 		<TextBlock
@@ -52,8 +53,24 @@
 			Text="{Binding Password}"
 		></TextBox>
 
+		<TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Foreground="Red"
+			Text="Ошибка входа" HorizontalAlignment="Center">
+			<TextBlock.Style>
+				<Style TargetType="TextBlock">
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding Connected}" Value="False">
+							<Setter Property="Visibility" Value="Visible"></Setter>
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Connected}" Value="True">
+							<Setter Property="Visibility" Value="Hidden"></Setter>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</TextBlock.Style>
+		</TextBlock>
+
 		<Button
-			Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Content="Войти"
+			Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Content="Войти"
 			HorizontalAlignment="Center"
 			Command="{Binding AuthentificationApp}">
 		</Button>

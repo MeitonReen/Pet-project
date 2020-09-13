@@ -1,12 +1,11 @@
-﻿using System.Windows.Input;
+﻿using System.Threading;
+using System.Windows.Input;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 
 using Layer0_Client.Shared.CommandsForDataContexts;
 using Layer0_Client.CreatingOrder.CommandsForDataContext;
-using System.ComponentModel;
-using System;
-using System.Threading;
 using SharedDTOsByServer.CreatingOrder;
 using SharedDTOsByClient.CreatingOrder;
 using SharedDTOs.DataAboutClientRequests;

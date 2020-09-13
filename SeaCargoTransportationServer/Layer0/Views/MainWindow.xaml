@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:SeaCargoTransportationBL"
         xmlns:Server="clr-namespace:Layer0.DataContext"
         mc:Ignorable="d"
-        Title="MainWindow" Height="200" Width="200">
+        Title="MainWindow" Height="200" Width="200"
+        WindowStartupLocation="CenterScreen">
 	<Window.Resources>
 		<Server:DCServer
             x:Key="DCServer"
@@ -38,11 +39,19 @@
         ></Button>
 
 		<TextBlock
-            Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-            HorizontalAlignment="Center"
-            >
-            <Run Text="Сервер включён?:"></Run>
-            <Run Text="{Binding ServerStatus}"></Run>
+            Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+			<TextBlock.Style>
+				<Style TargetType="TextBlock">
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding ServerStatus}" Value="True">
+							<Setter Property="Text" Value="Сервер включён"></Setter>
+                        </DataTrigger>
+						<DataTrigger Binding="{Binding ServerStatus}" Value="False">
+							<Setter Property="Text" Value="Сервер выключен"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+				</Style>
+            </TextBlock.Style>
         </TextBlock>
 	</Grid>
 </Window>

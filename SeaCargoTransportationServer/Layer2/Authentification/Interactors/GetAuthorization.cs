@@ -1,6 +1,8 @@
 ﻿using System.Linq;
+using Microsoft.Data.SqlClient;
 
 using Layer2.Shared.GatewayToDatabase;
+using Layer2.Shared.GatewayToDatabase.Context;
 using Layer2.Shared.Interactors;
 using Shared.Dictionary;
 using SharedDTOs;
@@ -16,12 +18,19 @@ namespace Layer2.Authentification.Interactors
 
 			bool Connected = false;
 			DataAuthorization = LoginAndPassword;
-			using (GetDataBase())
+			using (SeaCargoTransportationContext Database = GetDataBase())
 			{
-				Clients Client = Database.Clients.FirstOrDefault(Client =>
-					Client.Name == LoginAndPassword.Login);
-				Database = null;
-				
+				Clients Client = null;
+				try
+				{
+					Client = Database?.Clients.FirstOrDefault(Client =>
+						Client.Name == LoginAndPassword.Login);
+				}
+				catch (SqlException)
+				{
+					Connected = false;
+				}
+
 				if (Client != null)
 				{
 					Connected = true;
@@ -29,7 +38,6 @@ namespace Layer2.Authentification.Interactors
 					(SharedCommunication as DictionaryOfHandlers<EnumClientRequests>)?.
 						MulticastSendServiceData(LoginAndPassword);
 				}
-				
 				return Connected;
 			}
 		}

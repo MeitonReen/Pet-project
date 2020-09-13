@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using SharedDTOsByServer.MainMenu;
 using Layer2.Shared.GatewayToDatabase;
 using Layer2.Shared.Interactors;
+using Layer2.Shared.GatewayToDatabase.Context;
 
 namespace Layer2.MainMenu.Interactors
 {
@@ -11,15 +12,15 @@ namespace Layer2.MainMenu.Interactors
 	{
 		public override object Execute(object dataFromInputConverter)
 		{
-			using (GetDataBase())
+			using (SeaCargoTransportationContext Database = GetDataBase())
 			{
 				List<OrderLayer2> ClientOrders = new List<OrderLayer2>();
 
 				List<Orders> ClientOrdersDB =
-					Database.Orders.Where(Order =>
-						Order.Idclient == (int)GetClientIDByLogin()).ToList();
+					Database?.Orders.Where(Order =>
+						Order.Idclient == (int)GetClientIDByLogin())?.ToList();
 
-				foreach (Orders Order in ClientOrdersDB)
+				foreach (Orders Order in ClientOrdersDB ?? Enumerable.Empty<Orders>())
 				{
 					OrderLayer2 OrderLayer2 = new OrderLayer2();
 					OrderLayer2.IDOrder = Order.Idorder;
@@ -29,23 +30,24 @@ namespace Layer2.MainMenu.Interactors
 					List<CargoLayer2> CargosLayer2 = new List<CargoLayer2>();
 
 					List<CargosInOrders> CargosInOrder =
-						Database.CargosInOrders.Where(CargosInOrder =>
+						Database?.CargosInOrders.Where(CargosInOrder =>
 							CargosInOrder.Idorder == Order.Idorder).ToList();
 
-					foreach (CargosInOrders Cargo in CargosInOrder)
+					foreach (CargosInOrders Cargo in CargosInOrder ??
+						Enumerable.Empty<CargosInOrders>())
 					{
 						CargosCharacteristics CargoCharacteristics =
-							Database.CargosCharacteristics.FirstOrDefault(
+							Database?.CargosCharacteristics.FirstOrDefault(
 								CargoCharacteristics =>
 									CargoCharacteristics.IdcargosInOrders ==
 										Cargo.IdcargosInOrders);
 
 						CargoLayer2 CargoLayer2 = new CargoLayer2();
 						CargoLayer2.IDCargosInOrders = Cargo.IdcargosInOrders;
-						CargoLayer2.Amount = CargoCharacteristics.Amount != null ?
-							(decimal)CargoCharacteristics.Amount : 0;
-						CargoLayer2.Weight = CargoCharacteristics.Weight != null ?
-							(decimal)CargoCharacteristics.Weight : 0;
+						CargoLayer2.Amount = CargoCharacteristics?.Amount != null ?
+							(decimal)CargoCharacteristics?.Amount : 0;
+						CargoLayer2.Weight = CargoCharacteristics?.Weight != null ?
+							(decimal)CargoCharacteristics?.Weight : 0;
 
 						CargosLayer2.Add(CargoLayer2);
 					}
@@ -55,10 +57,11 @@ namespace Layer2.MainMenu.Interactors
 					List<OrderOnFlightLayer2> OrderOnFligths = new List<OrderOnFlightLayer2>();
 
 					List<OrdersOnFligths> OrderOnFligthsDB =
-						Database.OrdersOnFligths.Where(OrderOnFligths =>
+						Database?.OrdersOnFligths.Where(OrderOnFligths =>
 							OrderOnFligths.Idorder == OrderLayer2.IDOrder).ToList();
 
-					foreach (OrdersOnFligths OrderOnFligthDB in OrderOnFligthsDB)
+					foreach (OrdersOnFligths OrderOnFligthDB in OrderOnFligthsDB ??
+						Enumerable.Empty<OrdersOnFligths>())
 					{
 						OrderOnFlightLayer2 OrderOnFlight = new OrderOnFlightLayer2();
 						OrderOnFlight.DateTimeOfFlight = OrderOnFligthDB.DateTimeOfFlight;
@@ -66,7 +69,7 @@ namespace Layer2.MainMenu.Interactors
 							Ship.Idships == OrderOnFligthDB.Idships).ShipNumber;
 
 						List<StatusesFligths> StatusesFlight =
-							Database.StatusesFligths.Where(Statuses =>
+							Database?.StatusesFligths.Where(Statuses =>
 								Statuses.Idships == OrderOnFligthDB.Idships &&
 									Statuses.DateTimeOfFlight ==
 										OrderOnFligthDB.DateTimeOfFlight).ToList();
@@ -74,7 +77,7 @@ namespace Layer2.MainMenu.Interactors
 						OrderOnFlight.StatusesFlight = StatusesFlight.Select(Status1 =>
 						{
 							StatusesForFligths StatusesForFligths =
-								Database.StatusesForFligths.FirstOrDefault(Status2 =>
+								Database?.StatusesForFligths.FirstOrDefault(Status2 =>
 									Status2.IdstatusesForFligths ==
 										Status1.IdstatusesForFligths);
 							return StatusesForFligths.Status;
@@ -88,7 +91,6 @@ namespace Layer2.MainMenu.Interactors
 					ClientOrders.Add(OrderLayer2);
 				}
 
-				Database = null;
 				return ClientOrders;
 			}
 		}

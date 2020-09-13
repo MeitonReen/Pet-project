@@ -1,11 +1,11 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Threading;
+using System.ComponentModel;
 using System.Windows.Input;
+using System.Collections.ObjectModel;
 
 using Layer0_Client.CreatingOrder.DataContextForBindingsToWPF;
 using Layer0_Client.Shared.CommandsForDataContexts;
-using System.ComponentModel;
 using Layer0_Client.MainMenu.CommandsForDataContext;
-using System.Threading;
 using SharedDTOsByClient.MainMenu;
 using SharedDTOsByServer.MainMenu;
 using SharedDTOs.DataAboutClientRequests;
@@ -34,7 +34,6 @@ namespace Layer0_Client.MainMenu.DataContextForBindingsToWPF
 				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Orders"));
 			}
 		}
-
 		public ClientLayer2 Client
 		{
 			get
@@ -47,7 +46,6 @@ namespace Layer0_Client.MainMenu.DataContextForBindingsToWPF
 				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Client"));
 			}
 		}
-
 		public OrderLayer0 SelectedOrder
 		{
 			get
@@ -110,7 +108,10 @@ namespace Layer0_Client.MainMenu.DataContextForBindingsToWPF
 			get
 			{
 				//return new Check(this);
-				return new ShowView("VOrderDetails", SynchronizationContext.Current);
+				return new ShowView(
+					"VOrderDetails",
+					SynchronizationContext.Current,
+					obj => SelectedOrder != null);
 			}
 		}
 		public ICommand BackFromOrderDetails

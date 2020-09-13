@@ -1,6 +1,4 @@
-﻿
-using System.Threading;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 
 using Layer0_Client.Shared.SettersToDataContext;
 using Layer0_Client.CreatingOrder.DataContextForBindingsToWPF;

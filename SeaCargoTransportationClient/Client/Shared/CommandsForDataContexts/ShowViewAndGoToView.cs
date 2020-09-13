@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading;
-using System.Windows;
 
 using Layer0_Client.Shared.Create.Views;
 

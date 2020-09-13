@@ -1,6 +1,6 @@
 ﻿using System.Net.Sockets;
 
-namespace Layer1.Shared.Transceiver
+namespace Shared.Transceiver
 {
 	public class TCPConnector : TCPTransceiverAbstract
 	{

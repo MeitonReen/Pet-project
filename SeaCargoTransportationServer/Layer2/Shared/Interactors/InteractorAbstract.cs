@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+
 using Layer2.Shared.GatewayToDatabase.Context;
 using SharedDTOs;
 
@@ -6,7 +7,6 @@ namespace Layer2.Shared.Interactors
 {
 	public abstract class InteractorAbstract : IExecutorOfClientRequest
 	{
-		protected SeaCargoTransportationContext Database = null;
 		protected object DataAuthorization = null;
 		protected object SharedCommunication = null;
 
@@ -17,19 +17,15 @@ namespace Layer2.Shared.Interactors
 		protected int? GetClientIDByLogin()
 		{ 
 			int? IDClient = null;
-			GetDataBase();
-			IDClient = Database.Clients.FirstOrDefault(Client =>
+			IDClient = GetDataBase()?.Clients.FirstOrDefault(Client =>
 				Client.Name == GetLoginClient())?.Idclient;
 
 			return IDClient;
 		}
 		protected SeaCargoTransportationContext GetDataBase()
 		{
-			Database = (Database != null) ?
-				Database : (DataAuthorization != null) ?
-					new SeaCargoTransportationContext(DataAuthorization) : null;
-
-			return Database;
+			return (DataAuthorization != null) ?
+				new SeaCargoTransportationContext(DataAuthorization) : null;
 		}
 
 		public void MulticastSendDataAuthorization(object dataAuthorization)

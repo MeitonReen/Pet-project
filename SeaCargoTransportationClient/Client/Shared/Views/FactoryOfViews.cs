@@ -1,10 +1,8 @@
-﻿
+﻿using System;
 using System.Windows;
 using System.Collections.Generic;
-using System.Linq;
 
 using Layer0_Client.CreatingOrder.CreateViews;
-using System;
 
 namespace Layer0_Client.Shared.Create.Views
 {

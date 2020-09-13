@@ -50,7 +50,9 @@ namespace Layer2.Shared.GatewayToDatabase.Context
 		{
 			if (!optionsBuilder.IsConfigured)
 			{
-				optionsBuilder.UseSqlServer(SqlConnectionStringBuilder.ConnectionString);
+				optionsBuilder.UseSqlServer(
+					SqlConnectionStringBuilder.ConnectionString,
+					options => options.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null));
 			}
 		}
 

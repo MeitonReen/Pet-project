@@ -1,4 +1,4 @@
-﻿namespace Layer0_Client.Shared
+﻿namespace Shared
 {
 	public interface ITransceiver
 	{

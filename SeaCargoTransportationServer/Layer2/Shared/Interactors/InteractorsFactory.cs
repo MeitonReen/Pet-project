@@ -1,5 +1,4 @@
-﻿
-using Layer2.Shared.SimpleStateMachine;
+﻿using Layer2.Shared.SimpleStateMachine;
 using Shared.Dictionary;
 using SharedDTOs.DataAboutClientRequests;
 
