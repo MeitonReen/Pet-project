@@ -1,5 +1,0 @@
-F:\Вникаем в IT\Программист C#\Задачки побольше (Impl)\SeaCargoTransportationBL\SeaCargoTransportationBL\obj\Debug\netcoreapp3.1\Layer1_BL.csprojAssemblyReference.cache
-F:\Вникаем в IT\Программист C#\Задачки побольше (Impl)\SeaCargoTransportationBL\SeaCargoTransportationBL\obj\Debug\netcoreapp3.1\Shared\Views\MainWindow.g.cs
-F:\Вникаем в IT\Программист C#\Задачки побольше (Impl)\SeaCargoTransportationBL\SeaCargoTransportationBL\obj\Debug\netcoreapp3.1\App.g.cs
-F:\Вникаем в IT\Программист C#\Задачки побольше (Impl)\SeaCargoTransportationBL\SeaCargoTransportationBL\obj\Debug\netcoreapp3.1\Layer1_BL_MarkupCompile.cache
-F:\Вникаем в IT\Программист C#\Задачки побольше (Impl)\SeaCargoTransportationBL\SeaCargoTransportationBL\obj\Debug\netcoreapp3.1\Layer1_BL_MarkupCompile.lref

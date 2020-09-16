@@ -1,9 +1,0 @@
-F:\Вникаем в IT\Программист C#\Задачки побольше (Impl)\Shared\SharedDTOsByServer\bin\Release\netcoreapp3.1\SharedDTOsByServer.deps.json
-F:\Вникаем в IT\Программист C#\Задачки побольше (Impl)\Shared\SharedDTOsByServer\bin\Release\netcoreapp3.1\SharedDTOsByServer.dll
-F:\Вникаем в IT\Программист C#\Задачки побольше (Impl)\Shared\SharedDTOsByServer\bin\Release\netcoreapp3.1\SharedDTOsByServer.pdb
-F:\Вникаем в IT\Программист C#\Задачки побольше (Impl)\Shared\SharedDTOsByServer\obj\Release\netcoreapp3.1\SharedDTOsByServer.csprojAssemblyReference.cache
-F:\Вникаем в IT\Программист C#\Задачки побольше (Impl)\Shared\SharedDTOsByServer\obj\Release\netcoreapp3.1\SharedDTOsByServer.AssemblyInfoInputs.cache
-F:\Вникаем в IT\Программист C#\Задачки побольше (Impl)\Shared\SharedDTOsByServer\obj\Release\netcoreapp3.1\SharedDTOsByServer.AssemblyInfo.cs
-F:\Вникаем в IT\Программист C#\Задачки побольше (Impl)\Shared\SharedDTOsByServer\obj\Release\netcoreapp3.1\SharedDTOsByServer.csproj.CoreCompileInputs.cache
-F:\Вникаем в IT\Программист C#\Задачки побольше (Impl)\Shared\SharedDTOsByServer\obj\Release\netcoreapp3.1\SharedDTOsByServer.dll
-F:\Вникаем в IT\Программист C#\Задачки побольше (Impl)\Shared\SharedDTOsByServer\obj\Release\netcoreapp3.1\SharedDTOsByServer.pdb

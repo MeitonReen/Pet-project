@@ -9,7 +9,7 @@ using SharedDTOsByServer.CreatingOrder;
 
 namespace Layer2.CreatingOrder.Interactors
 {
-	public class SetNewOrderInDatabase : InteractorAbstract
+	public class SetNewOrder : InteractorAbstract
 	{
 		public override object Execute(object dataFromInputConverter)
 		{

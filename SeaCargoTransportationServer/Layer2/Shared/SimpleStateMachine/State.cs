@@ -1,22 +1,33 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using Shared;
 
 namespace Layer2.Shared.SimpleStateMachine
 {
-	public class State<TStateID> : IHandler
+	public class State<TStateID> : IHandler where TStateID : Enum
 	{
 		private IExecutorOfClientRequest Executor = null;
-		private TStateID[][] ArraysOfAllowedTransitionToThisState = null;
 
-		private SharedBufferForStates<TStateID> SharedBufferOfStates = null;
-		private List<State<TStateID>> StatesForResetAfterSuccessfulExecutionOfThisState = null;
-		private List<TStateID> StateIDsForResetAfterSuccessfulExecutionOfThisState = null;
-
-		public void Receive(object keyAndData)
+		private TStateID StateID;
+		private List<TStateID[]> ArraysOfAllowedTransitionsToThisState = new List<TStateID[]>();
+		private State<TStateID>[] StatesForResetAfterSuccessfulExecutionOfThisState = null;
+		private SharedBufferForStates<TStateID> _SharedBufferForStates = null;
+		public SharedBufferForStates<TStateID> SharedBufferForStates
 		{
-			Handle(keyAndData);
+			set { _SharedBufferForStates = value; }
+		}
+
+		public State(
+			TStateID stateID,
+			IExecutorOfClientRequest executor,
+			State<TStateID>[] statesForResetAfterSuccessfulExecutionOfThisState = null)
+		{
+			StateID = stateID;
+			Executor = executor;
+			StatesForResetAfterSuccessfulExecutionOfThisState =
+				statesForResetAfterSuccessfulExecutionOfThisState;
 		}
 
 		public object Handle(object stateIDAndData)
@@ -31,11 +42,8 @@ namespace Layer2.Shared.SimpleStateMachine
 				{
 					KeyValuePair<TStateID, object> StateIDAndData =
 						(KeyValuePair<TStateID, object>)stateIDAndData;
-					//Сколково
-					object ObjStateID = StateIDAndData.Key;
-					TStateID StateID = (TStateID)ObjStateID;
 
-					SharedBufferOfStates.SuccessExecutedStates.Add(StateID);
+					_SharedBufferForStates.SuccessExecutedStates.Add(StateIDAndData.Key);
 
 					ResetStates();
 				}
@@ -43,66 +51,82 @@ namespace Layer2.Shared.SimpleStateMachine
 			return Res;
 		}
 
-		public State(
-			IExecutorOfClientRequest executor,
-			TStateID[][] arraysOfAllowedTransitionToThisState,
-			SharedBufferForStates<TStateID> sharedBufferOfStates,
-			List<State<TStateID>> statesForResetAfterSuccessfulExecutionOfThisState = null,
-			List<TStateID> stateIDsForResetAfterSuccessfulExecutionOfThisState = null)
-		{
-			Executor = executor;
-			ArraysOfAllowedTransitionToThisState = arraysOfAllowedTransitionToThisState;
-			SharedBufferOfStates = sharedBufferOfStates;
-			StatesForResetAfterSuccessfulExecutionOfThisState =
-				statesForResetAfterSuccessfulExecutionOfThisState;
-			StateIDsForResetAfterSuccessfulExecutionOfThisState =
-				stateIDsForResetAfterSuccessfulExecutionOfThisState;
-		}
-
 		private bool CheckTransitionToThisState()
 		{
 			bool Allow = false;
-			TStateID[] ExecutedStates = SharedBufferOfStates.SuccessExecutedStates.ToArray();
+			List<TStateID> ExecutedStates = _SharedBufferForStates.SuccessExecutedStates;
 
 			for (int i = 0;
-				i < ArraysOfAllowedTransitionToThisState.GetLength(0) && !Allow;
+				i < ArraysOfAllowedTransitionsToThisState.Count && !Allow;
 				i++)
 			{
-				TStateID[] Line = ArraysOfAllowedTransitionToThisState[i];
-
-				if (!Line.Except(ExecutedStates).Any())
+				TStateID[] AllowedTransitions = ArraysOfAllowedTransitionsToThisState[i];
+				if (AllowedTransitions.Contains(FromState<TStateID>.Anywhere.StateID))
 				{
 					Allow = true;
+				} else 
+				{
+					var TransitionsForCheck = AllowedTransitions.Intersect(ExecutedStates);
+					if (AllowedTransitions.SequenceEqual(TransitionsForCheck) &&
+						TransitionsForCheck.Any())
+					{
+						Allow = true;
+					}
 				}
 			}
-
 			return Allow;
 		}
 		private void ResetStates()
 		{
-			if (StatesForResetAfterSuccessfulExecutionOfThisState != null)
+			foreach (State<TStateID> State in StatesForResetAfterSuccessfulExecutionOfThisState
+				?? new State<TStateID>[0])
 			{
-				foreach (State<TStateID> State in
-					StatesForResetAfterSuccessfulExecutionOfThisState)
-				{
-					State.SetDefault();
-				}
+				State.SetDefault();
 			}
-
-			SharedBufferOfStates.ExcludeItems(
-				StateIDsForResetAfterSuccessfulExecutionOfThisState?.ToArray());
 		}
-
 		private void SetDefault()
 		{
 			Executor.SetDefault();
+			_SharedBufferForStates.ExcludeItems(StateID);
 		}
 
+		public void AddStatesForResetAfterSuccessfulExecutionOfThisState(
+			params State<TStateID>[] statesForResetAfterSuccessfulExecutionOfThisState)
+		{
+			StatesForResetAfterSuccessfulExecutionOfThisState =
+				statesForResetAfterSuccessfulExecutionOfThisState;
+		}
+		
+		public State<TStateID> AddSingledAllowedTransitionFrom(State<TStateID> state)
+		{
+			ArraysOfAllowedTransitionsToThisState.Add(new TStateID[1] { state.StateID });
+			return this;
+		}
+		public State<TStateID> AddCombinedAllowedTransitionsFrom(params State<TStateID>[] states)
+		{
+			TStateID[] StateIDs = states.Select(State => State.StateID).ToArray();
+
+			ArraysOfAllowedTransitionsToThisState.Add(StateIDs);
+			return this;
+		}
+
+		public TStateID GetStateID()
+		{
+			return StateID;
+		}
+		public void LinkStates(params State<TStateID>[] States)
+		{
+			_SharedBufferForStates =
+				new SharedBufferForStates<TStateID>(FromState<TStateID>.Null.StateID);
+			foreach(State<TStateID> State in States ?? new State<TStateID>[0])
+			{
+				State.SharedBufferForStates = _SharedBufferForStates;
+			}
+		}
 		public void MulticastSendServiceData(object data)
 		{
 			Executor.MulticastSendDataAuthorization(data);
 		}
-
 		public void SetSharedCommunication(object reference)
 		{
 			Executor.SetSharedCommunication(reference);
