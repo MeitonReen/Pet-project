@@ -60,8 +60,7 @@ namespace Layer0_Client.Shared.MainController
 			{
 				ClientRequests.Add(
 					GettersFromDataContext.HandleWithoutKeyInto_WithKeyOut(
-						new KeyValuePair<EnumClientRequests, object>(ClientRequest, null)
-					)
+						new KeyValuePair<EnumClientRequests, object>(ClientRequest, null))
 				);
 			}
 			return ClientRequests.ToArray();
@@ -73,7 +72,7 @@ namespace Layer0_Client.Shared.MainController
 				SettersToDataContext.
 				HandleWithoutKeyInto_WithKeyOut(
 					(KeyValuePair<EnumClientRequests, object>)obj),
-				dataReceived);
+					dataReceived);
 		}
 	}
 }

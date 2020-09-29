@@ -15,7 +15,7 @@ namespace Layer2.Shared.Interactors
 			return (DataAuthorization as LoginAndPassword).Login;
 		}
 		protected int? GetClientIDByLogin()
-		{ 
+		{
 			int? IDClient = null;
 			IDClient = GetDataBase()?.Clients.FirstOrDefault(Client =>
 				Client.Name == GetLoginClient())?.Idclient;

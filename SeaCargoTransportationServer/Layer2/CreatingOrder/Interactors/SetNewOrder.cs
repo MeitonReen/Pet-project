@@ -11,17 +11,13 @@ namespace Layer2.CreatingOrder.Interactors
 {
 	public class SetNewOrder : InteractorAbstract
 	{
-		public override object Execute(object dataFromInputConverter)
+		public override object Execute(object dataFromClient)
 		{
 			using (SeaCargoTransportationContext Database = GetDataBase())
 			{
 				int IDClient = (int)GetClientIDByLogin();
-
-				NewOrderLayer2 ReceivedNewOrder =
-					(NewOrderLayer2)dataFromInputConverter;
-
+				NewOrderLayer2 ReceivedNewOrder = (NewOrderLayer2)dataFromClient;
 				List<CargoLayer2> Cargos = ReceivedNewOrder?.Cargos;
-
 				Random Random = new Random();
 
 				Orders NewOrder = new Orders()
@@ -42,8 +38,8 @@ namespace Layer2.CreatingOrder.Interactors
 					Database?.Containers?.Add(NewContainer);
 					Database?.SaveChanges();
 
-					ContainersCharacteristics CharacteristicsOfNewContainer = new
-						ContainersCharacteristics()
+					ContainersCharacteristics CharacteristicsOfNewContainer =
+						new ContainersCharacteristics()
 					{
 						Weight = 5,
 

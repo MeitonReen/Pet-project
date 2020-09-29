@@ -17,10 +17,8 @@ namespace Layer2.MainMenu.Interactors
 		{
 			using (SeaCargoTransportationContext Database = GetDataBase())
 			{
-				Clients ClientData =
-						Database?.Clients.FirstOrDefault(Client =>
-							Client.Name == GetLoginClient());
-				return ClientData;
+				return Database?.Clients.FirstOrDefault(Client =>
+					Client.Name == GetLoginClient());
 			}
 		}
 	}

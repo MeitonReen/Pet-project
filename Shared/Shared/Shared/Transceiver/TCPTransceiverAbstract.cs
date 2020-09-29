@@ -9,7 +9,6 @@ namespace Shared.Transceiver
 
 		protected string IP = "127.0.0.1";
 		protected int Port = 5000;
-
 		public void Send(object data)
 		{
 			CreateBF();

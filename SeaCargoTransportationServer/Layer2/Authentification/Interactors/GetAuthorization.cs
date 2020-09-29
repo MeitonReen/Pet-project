@@ -12,9 +12,9 @@ namespace Layer2.Authentification.Interactors
 {
 	public class GetAuthorization : InteractorAbstract
 	{
-		public override object Execute(object dataFromInputConverter)
+		public override object Execute(object dataFromClient)
 		{
-			LoginAndPassword LoginAndPassword = (LoginAndPassword)dataFromInputConverter;
+			LoginAndPassword LoginAndPassword = (LoginAndPassword)dataFromClient;
 
 			bool Connected = false;
 			DataAuthorization = LoginAndPassword;

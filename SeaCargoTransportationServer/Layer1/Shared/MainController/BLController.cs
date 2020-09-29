@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using Layer1.Shared.InputDataConverters;
 using Layer1.Shared.PresentersOfDataToOutput;
 using Layer2.Shared.Interactors;
 using Shared;
@@ -15,7 +14,6 @@ namespace Layer1.Shared.MainController
 	{
 		private DictionaryOfHandlers<EnumClientRequests> Interactors = null;
 		private DictionaryOfHandlers<EnumClientRequests> PresentersOfDataToOutput = null;
-		private DictionaryOfHandlers<EnumClientRequests> InputConverters = null;
 		private ITransceiver Transceiver = null;
 
 		private bool BServerStart = false;
@@ -26,8 +24,6 @@ namespace Layer1.Shared.MainController
 			Interactors = new InteractorsFactory().CreateInteractors();
 			PresentersOfDataToOutput =
 				new PresentersOfDataToOutputFactory().CreatePresenters();
-			InputConverters = new InputConvertersFactory().CreateInputConverters();
-
 			Transceiver = new TCPListener();
 		}
 
@@ -59,11 +55,8 @@ namespace Layer1.Shared.MainController
 			KeyValuePair<EnumClientRequests, object> ReceivedRequests =
 				(KeyValuePair<EnumClientRequests, object>)dataReceived;
 
-			KeyValuePair<EnumClientRequests, object> DataToInteractorsWithKeys =
-				InputConverters.HandleWithoutKeyInto_WithKeyOut(ReceivedRequests);
-
 			KeyValuePair<EnumClientRequests, object> DataToPresenters =
-				Interactors.HandleWithKeyInto_WithKeyOut(DataToInteractorsWithKeys);
+				Interactors.HandleWithKeyInto_WithKeyOut(ReceivedRequests);
 
 			KeyValuePair<EnumClientRequests, object> DataToSenderOutput =
 				PresentersOfDataToOutput.HandleWithoutKeyInto_WithKeyOut(DataToPresenters);

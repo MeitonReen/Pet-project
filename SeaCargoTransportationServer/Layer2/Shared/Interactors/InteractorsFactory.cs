@@ -59,7 +59,7 @@ namespace Layer2.Shared.Interactors
 			GetClientOrders =
 				new State<EnumClientRequests>(EnumClientRequests.GetClientOrders, new GetClientOrders());
 			SetOrderCancel =
-				new State<EnumClientRequests>(EnumClientRequests.SetCancelOrder, new SetOrderCancel());
+				new State<EnumClientRequests>(EnumClientRequests.SetCancelOrder, new SetCancelOrder());
 		}
 		private void CreateStatesCreatingOrder()
 		{
